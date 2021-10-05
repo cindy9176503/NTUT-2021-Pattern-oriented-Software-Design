@@ -8,7 +8,7 @@
 class Triangle: public Shape {
 public:
     Triangle(TwoDimensionalVector vec1, TwoDimensionalVector vec2) : _vec1(vec1), _vec2(vec2) {
-        if(vec1.x() == -vec2.x() && vec1.y() == -vec2.y()){ throw "Not two non-parallel two dimensional vectors"; }
+        if(vec1.y() / vec1.x() == vec2.y() / vec2.x()) { throw "Not two non-parallel two dimensional vectors"; }
     }
 
     double area() const override { return abs(_vec1.cross(_vec2) / 2); }

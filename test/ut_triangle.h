@@ -42,7 +42,7 @@ TEST(CaseTriangle, NonParallel) {
 }
 
 TEST(CaseTriangle, NonParallel2) {    
-    TwoDimensionalVector vec1(0.0, 1.0);
-    TwoDimensionalVector vec2(0.0, -1.0);   
+    TwoDimensionalVector vec1(1.0, 1.0);
+    TwoDimensionalVector vec2(9.0, 9.0);   
     ASSERT_ANY_THROW(Triangle t(vec1, vec2));
 }
