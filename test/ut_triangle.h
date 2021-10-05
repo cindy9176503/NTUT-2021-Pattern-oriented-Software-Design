@@ -34,3 +34,9 @@ TEST(CaseTriangle, Info1) {
     Triangle t(vec1, vec2);
     ASSERT_TRUE("Triangle ([3.00,12.43] [17.57,-4.00])" == t.info());
 }
+
+TEST(CaseTriangle, NonParallel) {    
+    TwoDimensionalVector vec1(3.0, 4.0);
+    TwoDimensionalVector vec2(-3.0, -4.0);   
+    ASSERT_ANY_THROW(Triangle t(vec1, vec2));
+}
