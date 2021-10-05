@@ -5,9 +5,19 @@ TEST(CaseCircle, Area) {
     ASSERT_NEAR(314.159, c.area(), 0.01);
 }
 
+TEST(CaseCircle, Area2) {
+    Circle c(5.6123);
+    ASSERT_NEAR(98.954, c.area(), 0.01);
+}
+
 TEST(CaseCircle, Perimeter) {
     Circle c(10.0);
     ASSERT_NEAR(62.832, c.perimeter(), 0.01);
+}
+
+TEST(CaseCircle, Perimeter2) {
+    Circle c(25);
+    ASSERT_NEAR(157.08, c.perimeter(), 0.01);
 }
 
 TEST(CaseCircle, Info) {
