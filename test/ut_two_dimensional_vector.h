@@ -50,7 +50,3 @@ TEST(CaseTwoDimensionalVector, Info2) {
     TwoDimensionalVector vec(3.198, 12.433);
     ASSERT_STREQ("[3.20,12.43]", vec.info().c_str());
 }
-
-TEST(CaseTwoDimensionalVector, ZeroVector){
-    ASSERT_ANY_THROW(TwoDimensionalVector vec(0, 0));
-}

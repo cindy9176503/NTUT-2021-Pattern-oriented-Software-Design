@@ -6,8 +6,8 @@
 class Rectangle : public Shape {
 public: 
     Rectangle(double length, double width) : _length(length), _width(width){
-        if(length <= 0) { throw "Not a positive double length!"; } 
-        else if(width <= 0) { throw "Not a positive double width!"; }
+        if(length <= 0) { throw "Not a positive double length"; } 
+        else if(width <= 0) { throw "Not a positive double width"; }
     }
 
     double area() const override { return _length * _width; }

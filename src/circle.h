@@ -8,7 +8,7 @@
 class Circle : public Shape {
 public:
     Circle(double radius) : _radius(radius){
-        if(_radius <= 0) { throw "Not a positive double radius!"; }
+        if(_radius <= 0) { throw "Not a positive double radius"; }
     }
 
     double area() const override { return pow(_radius, 2) * M_PI; }
