@@ -15,7 +15,7 @@ TEST(CaseParagraph, GetLevel3) {
 
 TEST(CaseParagraph, GetText) {
     Paragraph p(1, "title");
-    ASSERT_EQ("# title", p.getText());
+    ASSERT_EQ("# title\n", p.getText());
 }
 
 TEST(CaseParagraph, GetText2) {
