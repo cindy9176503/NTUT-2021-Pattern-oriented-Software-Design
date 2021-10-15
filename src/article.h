@@ -1,3 +1,6 @@
+#ifndef ARTICLE_H
+#define ARTICLE_H
+
 class Article {
 public:
     virtual ~Article(){};
@@ -8,3 +11,5 @@ public:
 
     virtual void add(Article* dpFormat){ throw("method not allowed"); }
 };
+
+#endif

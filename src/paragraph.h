@@ -2,6 +2,7 @@
 #define PARAGRAPH_H
 
 #include <vector>
+#include "article.h"
 
 class Paragraph : public Article {
 public:
