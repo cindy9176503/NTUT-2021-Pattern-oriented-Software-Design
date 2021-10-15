@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "article.h"
+#include "text.h"
 
 class Paragraph : public Article {
 public:
