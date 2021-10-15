@@ -6,8 +6,6 @@
 class Text : public Article {
 public:
     Text(std::string text):_text(text) {}
-
-    ~Text() {}
     
     std::string getText() const override { return _text; }
 

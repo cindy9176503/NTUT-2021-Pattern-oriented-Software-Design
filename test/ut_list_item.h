@@ -1,16 +1,16 @@
 #include "../src/list_item.h"
 
-TEST(CaseListItem, ListItem_GetText) {
+TEST(CaseListItem, GetText) {
     ListItem l("list");
     ASSERT_EQ("- list", l.getText());
 }
 
-TEST(CaseListItem, ListItem_GetLevel) {
+TEST(CaseListItem, GetLevel) {
     ListItem l("list");
     ASSERT_EQ(0, l.getLevel());
 }
 
-TEST(CaseListItem, ListItem_Add_Exception) {
+TEST(CaseListItem, Add_ShouldException) {
     ListItem l("list");
     ASSERT_ANY_THROW(l.add(new ListItem("123")));
 }
