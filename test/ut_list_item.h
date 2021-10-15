@@ -5,6 +5,11 @@ TEST(CaseListItem, GetText) {
     ASSERT_EQ("- list", l.getText());
 }
 
+TEST(CaseListItem, GetText2) {
+    ListItem l("hello!");
+    ASSERT_EQ("- hello!", l.getText());
+}
+
 TEST(CaseListItem, GetLevel) {
     ListItem l("list");
     ASSERT_EQ(0, l.getLevel());
