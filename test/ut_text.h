@@ -10,7 +10,7 @@ TEST(CaseText, GetLevel) {
     ASSERT_EQ(0, t.getLevel());
 }
 
-TEST(CaseText, Add_ShouldException) {
+TEST(CaseText, AddShouldThrow) {
     Text t("text");
     ASSERT_ANY_THROW(t.add(new Text("123")));
 }

@@ -10,7 +10,7 @@ TEST(CaseListItem, GetLevel) {
     ASSERT_EQ(0, l.getLevel());
 }
 
-TEST(CaseListItem, Add_ShouldException) {
+TEST(CaseListItem, AddShouldThrow) {
     ListItem l("list");
     ASSERT_ANY_THROW(l.add(new ListItem("123")));
 }

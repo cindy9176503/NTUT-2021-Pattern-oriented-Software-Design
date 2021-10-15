@@ -35,6 +35,7 @@ public:
     int getLevel() const override { return _level; }
 
     void add(Article* content) override {
+        if(typeid(*content) == typeid(Paragraph) && content -> getLevel() <= _level) { throw "Add lower or equal level paragraph"; }
         _content.push_back(content); 
     }
 

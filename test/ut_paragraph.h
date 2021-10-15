@@ -54,3 +54,15 @@ TEST(CaseParagraph, GetText5) {
     p.add(p2);
     ASSERT_EQ("# title\n- list1\n- list2\ntext\n## title2\n- list3\n- list4\nsub text", p.getText());
 }
+
+TEST(CaseParagraph, AddLowerLevelParagraphShouldThrow) {
+    Paragraph p(2, "title");
+    Paragraph* p2 = new Paragraph(1, "title2");
+    ASSERT_ANY_THROW(p.add(p2));
+}
+
+TEST(CaseParagraph, AddEqualLevelParagraphShouldThrow) {
+    Paragraph p(1, "title");
+    Paragraph* p2 = new Paragraph(1, "title2");
+    ASSERT_ANY_THROW(p.add(p2));
+}
