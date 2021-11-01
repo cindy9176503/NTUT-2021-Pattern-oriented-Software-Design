@@ -1,3 +1,7 @@
+#pragma once
+
+#include "iterator/iterator.h"
+
 class Shape {
 public:
     virtual ~Shape() {};
@@ -10,7 +14,7 @@ public:
 
     virtual Iterator* createIterator() = 0;
 
-    virtual void addShape(Shape* shape) { }
+    // virtual void addShape(Shape* shape) { }
 
-    virtual void deleteShape(Shape* shape) { }
+    // virtual void deleteShape(Shape* shape) { }
 };

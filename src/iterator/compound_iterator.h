@@ -1,4 +1,7 @@
 // you should define a template class or type `ForwardIterator`
+
+
+
 class CompoundIterator : public Iterator{
 public:
     CompoundIterator(ForwardIterator begin, ForwardIterator end) { }
