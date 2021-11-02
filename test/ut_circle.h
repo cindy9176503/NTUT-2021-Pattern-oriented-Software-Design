@@ -51,3 +51,18 @@ TEST(CaseCircle, NullIterator) {
     Circle c(10.0);
     ASSERT_TRUE(c.createIterator()->isDone());
 }
+
+TEST(CaseCircle, NullIterator_First_Exception) {
+    Circle c(10.0);
+    ASSERT_ANY_THROW(c.createIterator()->first());
+}
+
+TEST(CaseCircle, NullIterator_Next_Exception) {
+    Circle c(10.0);
+    ASSERT_ANY_THROW(c.createIterator()->next());
+}
+
+TEST(CaseCircle, NullIterator_Current_Exception) {
+    Circle c(10.0);
+    ASSERT_ANY_THROW(c.createIterator()->next());
+}

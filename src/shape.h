@@ -14,7 +14,7 @@ public:
 
     virtual Iterator* createIterator() = 0;
 
-    // virtual void addShape(Shape* shape) { }
+    virtual void addShape(Shape* shape) { throw("method not allowed"); }
 
-    // virtual void deleteShape(Shape* shape) { }
+    virtual void deleteShape(Shape* shape) { throw("method not allowed"); }
 };
