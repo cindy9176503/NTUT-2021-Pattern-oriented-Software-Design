@@ -17,7 +17,7 @@ TEST(CaseCompoundShape, GetArea_AddShape) {
     
     ASSERT_NEAR(5.0, cs -> area(), 0.01);
 
-    delete rec, rec2, it;
+    delete cs, rec, rec2, it;
 }
 
 TEST(CaseCompoundShape, GetArea_DelectShape) {
@@ -32,7 +32,7 @@ TEST(CaseCompoundShape, GetArea_DelectShape) {
     
     ASSERT_NEAR(1.0, cs -> area(), 0.01);
 
-    delete rec, rec2, it;
+    delete cs, rec, rec2, it;
 }
 
 TEST(CaseCompoundShape, GetArea_DelectShape2) {
@@ -47,7 +47,7 @@ TEST(CaseCompoundShape, GetArea_DelectShape2) {
     
     ASSERT_NEAR(4.0, cs -> area(), 0.01);
 
-    delete rec, rec2, it;
+    delete cs, rec, rec2, it;
 }
 
 TEST(CaseCompoundShape, GetArea_Empty_Exception) {
@@ -69,7 +69,7 @@ TEST(CaseCompoundShape, GetPerimeter_AddShape) {
     
     ASSERT_NEAR(12.0, cs -> perimeter(), 0.01);
 
-    delete rec, rec2, it;
+    delete cs, rec, rec2, it;
 }
 
 TEST(CaseCompoundShape, GetPerimeter_DelectShape) {
@@ -84,7 +84,7 @@ TEST(CaseCompoundShape, GetPerimeter_DelectShape) {
 
     ASSERT_NEAR(8.0, cs -> perimeter(), 0.01);
 
-    delete rec, rec2, it;
+    delete cs, rec, rec2, it;
 }
 
 TEST(CaseCompoundShape, GetPerimeter_DelectShape2) {
@@ -99,7 +99,7 @@ TEST(CaseCompoundShape, GetPerimeter_DelectShape2) {
 
     ASSERT_NEAR(4.0, cs -> perimeter(), 0.01);
 
-    delete rec, rec2, it;
+    delete cs, rec, rec2, it;
 }
 
 TEST(CaseCompoundShape, GetInfo) {
@@ -116,7 +116,7 @@ TEST(CaseCompoundShape, GetInfo) {
 
     ASSERT_EQ("CompoundShape\n{\nCircle (1.00)\nCircle (2.00)\nTriangle ([3.00,4.00] [3.00,0.00])\n}", cs -> info()); 
 
-    delete cs, c2, vec1, vec2, t;
+    delete cs, c, c2, vec1, vec2, t;
 }
 
 TEST(CaseCompoundShape, GetInfo_Empty_Exception) {
@@ -159,7 +159,7 @@ TEST(CaseCompoundShape, DeleteShape_OneShape) {
     it = cs -> createIterator();
     ASSERT_TRUE(it -> isDone());
 
-    delete cs, it;
+    delete cs, c, it;
 }
 
 TEST(CaseCompoundShape, DeleteShape_OneShape_DeleteALL_IsDoneTRUE) {
@@ -173,7 +173,7 @@ TEST(CaseCompoundShape, DeleteShape_OneShape_DeleteALL_IsDoneTRUE) {
     it = cs -> createIterator();
     ASSERT_TRUE(it -> isDone());
 
-    delete cs, it;
+    delete cs, c, it;
 }
 
 TEST(CaseCompoundShape, DeleteShape_TwoShape) {
@@ -232,7 +232,7 @@ TEST(CaseCompoundShape, AddShape) {
     
     ASSERT_NEAR(1.0, cs -> area(), 0.01);
 
-    delete cs, rec, it;
+    delete cs, rec, rec2, it;
 }
 
 TEST(CaseCompoundShape, AddShape2) {

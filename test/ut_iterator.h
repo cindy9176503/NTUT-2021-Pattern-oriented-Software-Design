@@ -5,24 +5,28 @@
 TEST(CaseNullIterator, Current_Exception) {
     Iterator* it = new NullIterator();
     ASSERT_ANY_THROW(it->next());
+
     delete it;
 }
 
 TEST(CaseNullIterator, First_Exception) {
     Iterator* it = new NullIterator();
     ASSERT_ANY_THROW(it->first());
+
     delete it;
 }
 
 TEST(CaseNullIterator, Next_Exception) {
     Iterator* it = new NullIterator();
     ASSERT_ANY_THROW(it->next());
+
     delete it;
 }
 
 TEST(CaseNullIterator, IsDone_True){
     Iterator* it = new NullIterator();
     ASSERT_TRUE(it->isDone());
+
     delete it;
 }
 
@@ -197,5 +201,5 @@ TEST(CaseCompoundIterator, TwoShapes_IsDone_Current_Exception) {
     it -> next();
     ASSERT_ANY_THROW(it -> currentItem());
 
-    delete c, cs, it;
+    delete c, c2, cs, it;
 }

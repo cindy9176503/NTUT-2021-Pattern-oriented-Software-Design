@@ -63,5 +63,4 @@ public:
     }
 private:
     std::list<Shape*> _shapes;
-    //std::list<Shape*>* _shapes = new std::list<Shape*>;
 };
