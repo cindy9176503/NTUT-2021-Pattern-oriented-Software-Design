@@ -6,42 +6,62 @@
 #include "./iterator/compound_iterator.h"
 
 #include <list>
-#include <sstream>
 
 class CompoundShape : public Shape {
 public:
     ~CompoundShape() { }
 
-    double area() const override { return 0; }
+    double area() const override { 
+        if(!_shapes.size()) { throw "empty"; return 0;}
+        double result = 0;
 
-    double perimeter() const override { return 0; }
-
-    std::string info() const override {        
-        return 0;     
+        for (auto it = _shapes.begin(); it != _shapes.end(); ++ it) {
+            result += (*it) -> area();
+        }
+        return result; 
     }
 
-    Iterator* createIterator() override { 
-        std::stringstream ss, ss2;
+    double perimeter() const override { 
+        if(!_shapes.size()) { throw "empty"; return 0;}
+        double result = 0;
 
-        //_count = _shapes -> size();
+        for (auto it = _shapes.begin(); it != _shapes.end(); ++ it) {
+            result += (*it) -> perimeter();
+        }
+        return result;  
+    }
+
+    std::string info() const override {    
+        if(!_shapes.size()) { throw "empty"; return 0;}
         
-        ss << _shapes->size();
-        std::cout << ss.str()  << std::endl;
+        std::string result = "CompoundShape\n{\n";
 
-        NullIterator* ni;
-        CompoundIterator* ci;
-         
-        return 0;
-        //return new CompoundIterator(_shapes->begin(), _shapes->end());
+        for (auto it = _shapes.begin(); it != _shapes.end(); ++ it) {
+            result += (*it) -> info();
+            result += "\n";
+        }
+        result += "}";
+
+        return result;      
     }
 
-    void addShape(Shape* shape) override { _shapes->push_back(shape); }
+    Iterator* createIterator() override { return new CompoundIterator(_shapes.begin(), _shapes.end()); }
+
+    void addShape(Shape* shape) override { _shapes.push_back(shape); }
 
     void deleteShape(Shape* shape) override {
-        
+        if(!_shapes.size()) { throw "empty"; }
+        else {
+            for (auto del_it = _shapes.begin(); del_it != _shapes.end(); ++ del_it) {
+                if (*del_it == shape) { 
+                    del_it = _shapes.erase(del_it); 
+                    return;
+                }    
+            }
+            throw "can't find the shape to delete";
+        }
     }
 private:
-    //std::list<Shape*> _shapes;
-    std::list<Shape*>* _shapes = new std::list<Shape*>;
-    int _count;
+    std::list<Shape*> _shapes;
+    //std::list<Shape*>* _shapes = new std::list<Shape*>;
 };

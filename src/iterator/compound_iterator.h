@@ -5,21 +5,29 @@
 #include "../shape.h"
 #include "./iterator.h"
 
-template<class ForwardIterator>
+#include <list>
+
+// template<class _ForwardIterator>
 
 class CompoundIterator : public Iterator{
 public:
-    CompoundIterator(ForwardIterator begin, ForwardIterator end):_begin(begin), _end(end) { 
-        
+    template<class ForwardIterator> CompoundIterator(ForwardIterator begin, ForwardIterator end):_begin(begin), _end(end) {         
+        first();
     }
 
-    void first() override { throw("method not allowed"); }
+    void first() override { _current = _begin;}
 
-    Shape* currentItem() const override { throw("method not allowed"); }
+    Shape* currentItem() const override { 
+        if(isDone()) { throw("is done"); return NULL;}
+        else { return *_current; }
+    }
 
-    void next() override { throw("method not allowed"); }
+    void next() override {
+        if(isDone()) { throw("is done"); }
+        else { ++ _current; }
+    }
 
-    bool isDone() const override { return true; }
+    bool isDone() const override { return _current == _end; }
 private:
-    ForwardIterator _begin, _end;
+    std::list<Shape*>::iterator _begin, _end, _current;
 };
