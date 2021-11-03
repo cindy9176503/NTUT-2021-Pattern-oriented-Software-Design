@@ -9,7 +9,11 @@
 
 class CompoundShape : public Shape {
 public:
-    ~CompoundShape() { }
+    ~CompoundShape() {
+        for (auto it = _shapes.begin(); it != _shapes.end(); ++ it) {
+            delete *it;
+        }
+    }
 
     double area() const override { 
         if(!_shapes.size()) { throw "empty"; return 0;}
@@ -45,7 +49,7 @@ public:
         return result;      
     }
 
-    Iterator* createIterator() override { return new CompoundIterator(_shapes.begin(), _shapes.end()); }
+    Iterator* createIterator() override { return new CompoundIterator<std::list<Shape*>::iterator>(_shapes.begin(), _shapes.end()); }
 
     void addShape(Shape* shape) override { _shapes.push_back(shape); }
 

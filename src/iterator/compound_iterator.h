@@ -7,11 +7,11 @@
 
 #include <list>
 
-// template<class _ForwardIterator>
+template<class ForwardIterator>
 
 class CompoundIterator : public Iterator{
 public:
-    template<class ForwardIterator> CompoundIterator(ForwardIterator begin, ForwardIterator end):_begin(begin), _end(end) {         
+    CompoundIterator(ForwardIterator begin, ForwardIterator end):_begin(begin), _end(end) {         
         first();
     }
 
@@ -29,5 +29,5 @@ public:
 
     bool isDone() const override { return _current == _end; }
 private:
-    std::list<Shape*>::iterator _begin, _end, _current;
+    ForwardIterator _begin, _end, _current;
 };
