@@ -99,3 +99,6 @@ Course Link: https://ssl-gitlab.csie.ntut.edu.tw/yccheng/posd2021f
 
 ## Environment Setting
 Tutorial: https://ssl-gitlab.csie.ntut.edu.tw/course/environment_setting.git
+
+## git SSL certification problem
+git config --global http.sslVerify false
