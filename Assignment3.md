@@ -138,3 +138,11 @@ Tutorial: https://ssl-gitlab.csie.ntut.edu.tw/course/environment_setting.git
 
 ## git SSL certification problem
 git config --global http.sslVerify false
+
+## Midterm I: 6:00pm - 9:00pm Wed 11/10/2021, 12F Computer Room open book and class repo
+C++ Reference: http://www.cplusplus.com/reference/
+Dictionary: https://dictionary.cambridge.org/zht/
+Your own code from GitLab: https://ssl-gitlab.csie.ntut.edu.tw/
+Class repo: https://ssl-gitlab.csie.ntut.edu.tw/yccheng/posd2021f
+Design Patterns Paper Book (Official)
+
