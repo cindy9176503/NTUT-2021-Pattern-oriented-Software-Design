@@ -1,4 +1,5 @@
 #include "../src/circle.h"
+#include "../src/iterator/null_iterator.h"
 
 TEST(CaseCircle, Area) {
     Circle c(10.0);
@@ -47,7 +48,12 @@ TEST(CaseCircle, Not_zero_radius) {
     ASSERT_ANY_THROW(Circle c(0));
 }
 
-TEST(CaseCircle, NullIterator) {
+TEST(CaseCircle, IsNullIterator) {
+    Circle c(10.0);
+    ASSERT_EQ(typeid(NullIterator), typeid(*c.createIterator()));
+}
+
+TEST(CaseCircle, NullIterator_isDoneTrue) {
     Circle c(10.0);
     ASSERT_TRUE(c.createIterator()->isDone());
 }
@@ -65,4 +71,20 @@ TEST(CaseCircle, NullIterator_Next_Exception) {
 TEST(CaseCircle, NullIterator_Current_Exception) {
     Circle c(10.0);
     ASSERT_ANY_THROW(c.createIterator()->next());
+}
+
+TEST(CaseCircle, AddShape_Exception) { 
+    Circle c(10.0);
+    Circle* c2 = new Circle(10.0);
+    ASSERT_ANY_THROW(c.addShape(c2));
+
+    delete c2;
+}
+
+TEST(CaseCircle, DeleteShape_Exception) { 
+    Circle c(10.0);
+    Circle* c2 = new Circle(10.0);
+    ASSERT_ANY_THROW(c.deleteShape(c2));
+
+    delete c2;
 }

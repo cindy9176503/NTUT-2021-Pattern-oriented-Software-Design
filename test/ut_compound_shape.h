@@ -102,6 +102,21 @@ TEST(CaseCompoundShape, GetPerimeter_DelectShape2) {
     delete cs, rec, rec2, it;
 }
 
+TEST(CaseCompoundShape, GetPerimeter_DelectShape3) {
+    CompoundShape* cs = new CompoundShape();
+    Rectangle* rec = new Rectangle(1.0, 1.0);
+    Rectangle* rec2 = new Rectangle(1.0, 1.0);
+    Iterator* it;
+
+    cs -> addShape(rec);
+    cs -> addShape(rec2);
+    cs -> deleteShape(rec);
+
+    ASSERT_NEAR(4.0, cs -> perimeter(), 0.01);
+
+    delete cs, rec, rec2, it;
+}
+
 TEST(CaseCompoundShape, GetInfo) {
     CompoundShape* cs = new CompoundShape();
     Circle* c = new Circle(1.0);
@@ -136,17 +151,17 @@ TEST(CaseCompoundShape, DeleteShape_Empty_Exception) {
     delete cs, c;
 }
 
-TEST(CaseCompoundShape, DeleteShape_Invaild_Exception) {
-    CompoundShape* cs = new CompoundShape();
-    Circle* c = new Circle(1.0);
-    Circle* c2 = new Circle(2.0);
+// TEST(CaseCompoundShape, DeleteShape_Invaild_Exception) {
+//     CompoundShape* cs = new CompoundShape();
+//     Circle* c = new Circle(1.0);
+//     Circle* c2 = new Circle(2.0);
 
-    cs -> addShape(c);
+//     cs -> addShape(c);
     
-    ASSERT_ANY_THROW(cs -> deleteShape(c2));
+//     ASSERT_ANY_THROW(cs -> deleteShape(c2));
 
-    delete cs, c, c2;
-}
+//     delete cs, c, c2;
+// }
 
 TEST(CaseCompoundShape, DeleteShape_OneShape) {
     CompoundShape* cs = new CompoundShape();

@@ -1,4 +1,5 @@
 #include "../src/triangle.h"
+#include "../src/iterator/null_iterator.h"
 
 TEST(CaseTriangle, Area) {    
     TwoDimensionalVector vec1(3.0, 4.0);
@@ -45,4 +46,59 @@ TEST(CaseTriangle, NonParallel2) {
     TwoDimensionalVector vec1(1.0, 1.0);
     TwoDimensionalVector vec2(9.0, 9.0);   
     ASSERT_ANY_THROW(Triangle t(vec1, vec2));
+}
+
+TEST(CaseTriangle, IsNullIterator) {
+    TwoDimensionalVector vec1(3.0, 4.0);
+    TwoDimensionalVector vec2(3.0, 0.0); 
+    Triangle t(vec1, vec2);
+    ASSERT_EQ(typeid(NullIterator) ,typeid(*t.createIterator()));
+}
+
+TEST(CaseTriangle, NullIterator_isDoneTrue) {
+    TwoDimensionalVector vec1(3.0, 4.0);
+    TwoDimensionalVector vec2(3.0, 0.0); 
+    Triangle t(vec1, vec2);
+    ASSERT_TRUE(t.createIterator()->isDone());
+}
+
+TEST(CaseTriangle, NullIterator_First_Exception) {
+    TwoDimensionalVector vec1(3.0, 4.0);
+    TwoDimensionalVector vec2(3.0, 0.0);  
+    Triangle t(vec1, vec2);
+    ASSERT_ANY_THROW(t.createIterator()->first());
+}
+
+TEST(CaseTriangle, NullIterator_Next_Exception) {
+    TwoDimensionalVector vec1(3.0, 4.0);
+    TwoDimensionalVector vec2(3.0, 0.0);   
+    Triangle t(vec1, vec2);
+    ASSERT_ANY_THROW(t.createIterator()->next());
+}
+
+TEST(CaseTriangle, NullIterator_Current_Exception) {
+    TwoDimensionalVector vec1(3.0, 4.0);
+    TwoDimensionalVector vec2(3.0, 0.0);   
+    Triangle t(vec1, vec2);
+    ASSERT_ANY_THROW(t.createIterator()->next());
+}
+
+TEST(CaseTriangle, AddShape_Exception) { 
+    TwoDimensionalVector vec1(3.0, 4.0);
+    TwoDimensionalVector vec2(3.0, 0.0);  
+    Triangle t(vec1, vec2);
+    Triangle* t2 = new Triangle(vec1, vec2);
+    ASSERT_ANY_THROW(t.addShape(t2));
+
+    delete t2;
+}
+
+TEST(CaseTriangle, DeleteShape_Exception) { 
+    TwoDimensionalVector vec1(3.0, 4.0);
+    TwoDimensionalVector vec2(3.0, 0.0);  
+    Triangle t(vec1, vec2);
+    Triangle* t2 = new Triangle(vec1, vec2);
+    ASSERT_ANY_THROW(t.deleteShape(t2));
+
+    delete t2;
 }

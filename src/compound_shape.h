@@ -56,13 +56,15 @@ public:
     void deleteShape(Shape* shape) override {
         if(!_shapes.size()) { throw "empty"; }
         else {
-            for (auto del_it = _shapes.begin(); del_it != _shapes.end(); ++ del_it) {
-                if (*del_it == shape) { 
-                    del_it = _shapes.erase(del_it); 
-                    return;
-                }    
-            }
-            throw "can't find the shape to delete";
+            _shapes.remove(shape);
+
+            // for (auto del_it = _shapes.begin(); del_it != _shapes.end(); ++ del_it) {
+            //     if (*del_it == shape) { 
+            //         del_it = _shapes.erase(del_it); 
+            //         return;
+            //     }    
+            // }
+            // throw "can't find the shape to delete";
         }
     }
 private:
