@@ -2,6 +2,8 @@
 
 #include "shape.h"
 #include "iterator/null_iterator.h"
+#include "./shape_visitor.h"
+
 #include <cmath>
 #include <sstream>
 
@@ -25,6 +27,11 @@ public:
     }
 
     Iterator* createIterator() override { return new NullIterator(); }
+
+    void accept(ShapeVisitor* visitor) {
+        visitor->visitRectangle(this); 
+    }
+
 private:
     double _length, _width;
 };

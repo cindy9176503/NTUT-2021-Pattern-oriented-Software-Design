@@ -2,6 +2,9 @@
 
 #include "shape.h"
 #include "iterator/null_iterator.h"
+#include "./shape_visitor.h"
+
+#include <iomanip>
 #include <cmath>
 #include <sstream>
 
@@ -24,6 +27,10 @@ public:
     }
 
     Iterator* createIterator() override { return new NullIterator(); }
+
+    void accept(ShapeVisitor* visitor) { 
+        visitor->visitCircle(this); 
+    }
 private:
     double _radius;
 };

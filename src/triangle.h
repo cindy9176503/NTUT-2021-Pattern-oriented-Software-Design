@@ -2,6 +2,8 @@
 
 #include "two_dimensional_vector.h"
 #include "iterator/null_iterator.h"
+#include "./shape_visitor.h"
+
 #include <cmath>
 #include <sstream>
 
@@ -25,6 +27,11 @@ public:
     }
 
     Iterator* createIterator() override { return new NullIterator(); }
+
+    void accept(ShapeVisitor* visitor) { 
+        visitor->visitTriangle(this); 
+    }
+
 private:
     TwoDimensionalVector _vec1, _vec2;
 };
