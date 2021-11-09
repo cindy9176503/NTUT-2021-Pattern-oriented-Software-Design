@@ -7,6 +7,8 @@
 
 #include <list>
 
+
+
 class CompoundShape : public Shape {
 public:
     ~CompoundShape() {
@@ -35,11 +37,9 @@ public:
         return result;  
     }
 
-    std::string info() const override {    
+    std::string info() const override { 
         if(!_shapes.size()) { throw "empty"; return 0;}
-        
         std::string result = "CompoundShape\n{\n";
-
         for (auto it = _shapes.begin(); it != _shapes.end(); ++ it) {
             result += (*it) -> info();
             result += "\n";
@@ -67,6 +67,11 @@ public:
             // throw "can't find the shape to delete";
         }
     }
+
+    void accept(ShapeVisitor* visitor) {
+        visitor->visitCompoundShape(this);
+    }
+
 private:
     std::list<Shape*> _shapes;
 };

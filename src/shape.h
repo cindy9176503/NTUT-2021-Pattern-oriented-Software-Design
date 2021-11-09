@@ -2,6 +2,8 @@
 
 #include "iterator/iterator.h"
 
+class ShapeVisitor;
+
 class Shape {
 public:
     virtual ~Shape() {};
@@ -17,4 +19,6 @@ public:
     virtual void addShape(Shape* shape) { throw("method not allowed"); }
 
     virtual void deleteShape(Shape* shape) { throw("method not allowed"); }
+
+    virtual void accept(ShapeVisitor* visitor) = 0;
 };

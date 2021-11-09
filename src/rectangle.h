@@ -28,7 +28,7 @@ public:
 
     Iterator* createIterator() override { return new NullIterator(); }
 
-    void accept(ShapeVisitor* visitor) {
+    void accept(ShapeVisitor* visitor) override {
         visitor->visitRectangle(this); 
     }
 
