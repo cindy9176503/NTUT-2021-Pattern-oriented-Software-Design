@@ -4,7 +4,7 @@
 
 class Text; 
 class ListItem; 
-class Paragraph; 
+class Paragraph;
 
 class ArticleVisitor {
 public:
