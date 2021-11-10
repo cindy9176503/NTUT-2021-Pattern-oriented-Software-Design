@@ -6,6 +6,7 @@
 #include "text.h"
 #include "iterator/iterator.h"
 #include "iterator/compound_iterator.h"
+#include "visitor/article_visitor.h"
 
 class Paragraph : public Article {
 public:

@@ -2,6 +2,7 @@
 
 #include "article.h"
 #include "iterator/null_iterator.h"
+#include "visitor/article_visitor.h"
 
 class Text : public Article {
 public:

@@ -2,6 +2,7 @@
 
 class Iterator;
 
+
 class Article {
    public:
     virtual ~Article(){};
@@ -12,7 +13,7 @@ class Article {
 
     virtual Iterator* createIterator() = 0;
 
-    // virtual void accept(ArticleVisitor* visitor) = 0;
+    //virtual void accept(ArticleVisitor* visitor) = 0;
 
     virtual void add(Article* dpFormat){ throw("method not allowed"); }
 };

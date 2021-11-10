@@ -11,14 +11,20 @@ SRC= src/article.h src/list_item.h src/paragraph.h src/text.h \
 	 src/iterator/null_iterator.h src/visitor/article_visitor.h \
 	 src/visitor/html_visitor.h src/visitor/markdown_visitor.h
 
-ut_main: test/ut_main.cpp $(TEST) $(SRC)
-	g++ -std=c++11 test/ut_main.cpp -o bin/ut_all -lgtest -lpthread
+OBJ = obj/shape_visitor.o
+
+ut_main: test/ut_main.cpp $(TEST) $(SRC) $(OBJ)
+	g++ -std=c++11 test/ut_main.cpp $(OBJ) -o bin/ut_all -lgtest -lpthread
+
+obj/shape_visitor.o: src/visitor/article_visitor.cpp src/visitor/article_visitor.h
+	g++ -std=c++11 -Wfatal-errors -Wall -c src/visitor/article_visitor.cpp -o obj/shape_visitor.o
+
 
 directories:
-	mkdir -p bin
+	mkdir -p bin obj
 
 clean:
-	rm -rf bin
+	rm -rf bin obj
 
 test: all
 	bin/ut_all
