@@ -1,3 +1,5 @@
+#pragma once
+
 class CompoundIterator : public Iterator {
    public:
     CompoundIterator(ForwardIterator begin, ForwardIterator end) {}
