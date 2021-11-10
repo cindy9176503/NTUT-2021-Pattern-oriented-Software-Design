@@ -37,7 +37,7 @@ TEST(CaseMarkdownVisitor, ParagraphInfo) {
     p.accept(visitor);
     std::string result = visitor->getResult();
 
-    ASSERT_EQ("# title\n- list1\n- list2\ntext", result);
+    ASSERT_EQ("# title\n- list1\n- list2\ntext\n", result);
 
     delete visitor;
 }

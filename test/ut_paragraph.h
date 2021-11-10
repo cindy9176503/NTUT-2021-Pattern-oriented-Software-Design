@@ -66,4 +66,3 @@ TEST(CaseParagraph, AddEqualLevelParagraphShouldThrow) {
     Paragraph* p2 = new Paragraph(1, "title2");
     ASSERT_ANY_THROW(p.add(p2));
 }
-

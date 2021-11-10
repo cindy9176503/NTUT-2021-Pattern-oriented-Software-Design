@@ -6,7 +6,7 @@ public:
 
     void visitText(Text* t) override{ _result += t->getText(); }
 
-    void visitParagraph(Paragraph* p) override{ _result += p->getText(); }
+    void visitParagraph(Paragraph* p) override{ _result = p->getText() + "\n"; }
 
     std::string getResult() const override { return _result; }
 

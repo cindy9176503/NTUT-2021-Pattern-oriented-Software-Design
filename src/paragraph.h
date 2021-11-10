@@ -31,8 +31,8 @@ public:
         for(int i = 1; i < _content.size(); i ++) {
             str += _content[i] -> getText();
             if(typeid(_content[i]) != typeid(Paragraph) && i != _content.size() - 1) { str += "\n"; }
+            // if(typeid(_content[i]) != typeid(Paragraph) && i != _content.size() - 1) { str += "\n"; }
         }
-        
         return str;
     }
 
