@@ -45,7 +45,7 @@ public:
         _content.push_back(content);
     }
 
-    // void accept(ArticleVisitor* visitor) override { visitor->visitParagraph(this); }
+    void accept(ArticleVisitor* visitor) override { visitor->visitParagraph(this); }
 
 private:
     int _level;

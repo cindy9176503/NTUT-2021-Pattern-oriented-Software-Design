@@ -2,6 +2,7 @@
 
 #include "article.h"
 #include "iterator/null_iterator.h"
+#include "visitor/article_visitor.h"
 
 class ListItem : public Article {
 public:
@@ -11,7 +12,7 @@ public:
 
     Iterator* createIterator() override { return new NullIterator(); }
 
-    // void accept(ArticleVisitor* visitor) override { visitor->visitListItem(this); }
+    void accept(ArticleVisitor* visitor) override { visitor->visitListItem(this); }
 
 private:
     std::string _text;

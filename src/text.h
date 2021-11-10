@@ -12,7 +12,7 @@ public:
 
     Iterator* createIterator() override { return new NullIterator(); }
 
-    // void accept(ArticleVisitor* visitor) override { visitor->visitText(this); }
+    void accept(ArticleVisitor* visitor) override { visitor->visitText(this); }
 
 private:
     std::string _text;
