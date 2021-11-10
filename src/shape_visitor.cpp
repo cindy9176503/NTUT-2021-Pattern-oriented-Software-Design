@@ -61,3 +61,89 @@ std::string ShapeInfoVisitor::getResult() {
     // std::cout<< _result <<std::endl;
     return _result;
 }
+
+//------------------------------------------------------------------
+
+void SelectShapeVisitor::visitCircle(Circle* c) {
+    if (_constraint) {
+        if (_constraint(c)) {
+            _result = c; 
+        }
+    }
+}
+
+void SelectShapeVisitor::visitRectangle(Rectangle* r) {
+    if (_constraint) {
+        if (_constraint(r)) {
+            _result = r; 
+        }
+    }
+}
+
+void SelectShapeVisitor::visitTriangle(Triangle* t) {
+    if (_constraint) {
+        if (_constraint(t)) {
+            _result = t; 
+        }
+    }
+}
+
+void SelectShapeVisitor::visitCompoundShape(CompoundShape* cs) {
+    Iterator* it = cs->createIterator();
+    for (it->first(); !it->isDone(); it->next()) {
+        it->currentItem()->accept(this);
+    }
+}
+
+Shape* SelectShapeVisitor::getShape() {
+    //std::cout<< _result->info() <<std::endl;
+    return _result;
+}
+
+//------------------------------------------------------------------
+
+void SelectAllShapeVisitor::visitCircle(Circle* c) {
+    if (_constraint) {
+        if (_constraint(c)) {
+            _result.push_back(c); 
+        }
+    }
+}
+
+void SelectAllShapeVisitor::visitRectangle(Rectangle* r) {
+    if (_constraint) {
+        if (_constraint(r)) {
+            _result.push_back(r); 
+        }
+    }
+}
+
+void SelectAllShapeVisitor::visitTriangle(Triangle* t) {
+    if (_constraint) {
+        if (_constraint(t)) {
+            _result.push_back(t);
+        }
+    }
+}
+
+void SelectAllShapeVisitor::visitCompoundShape(CompoundShape* cs) {
+    Iterator* it = cs->createIterator();
+    for (it->first(); !it->isDone(); it->next()) {
+        it->currentItem()->accept(this);
+    }
+}
+
+std::string SelectAllShapeVisitor::getResultInfo() {
+
+    for (auto it = _result.begin(); it != _result.end(); ++ it) {
+        _resultInfo += (*it) -> info();
+        _resultInfo += "\n";
+    }
+
+    return _resultInfo;
+}
+
+std::list<Shape*> SelectAllShapeVisitor::getResult() {
+    //std::cout<< _result.front()->info() <<std::endl;
+    return _result;
+}

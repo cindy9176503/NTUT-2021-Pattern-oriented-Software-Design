@@ -1,13 +1,11 @@
 #pragma once
 
+#include <list>
+
 #include "./shape.h"
 #include "./iterator/iterator.h"
 #include "./iterator/null_iterator.h"
 #include "./iterator/compound_iterator.h"
-
-#include <list>
-
-
 
 class CompoundShape : public Shape {
 public:

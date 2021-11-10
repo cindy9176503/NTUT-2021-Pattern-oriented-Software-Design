@@ -1,6 +1,9 @@
 #pragma once
 
 #include <string>
+#include <list>
+
+#include "./shape.h"
 
 class Circle; 
 class Rectangle; 
@@ -32,4 +35,42 @@ public:
 private:
     std::string _result;
     int _currentInfoLabel = 0;
+};
+
+typedef bool (*ShapeConstraint)(Shape*); // pointer to function
+class SelectShapeVisitor: public ShapeVisitor {
+public:
+    // SelectShapeVisitor(): _result(nullptr), _constraint(nullptr) {}
+    SelectShapeVisitor(ShapeConstraint constraint): _result(nullptr), _constraint(constraint) {}
+    void visitCircle(Circle* c);
+    void visitRectangle(Rectangle* r);
+    void visitTriangle(Triangle* t);
+    void visitCompoundShape(CompoundShape* cs);
+    Shape* getShape();
+
+private:
+    Shape* _result;
+    ShapeConstraint _constraint;
+};
+
+class SelectAllShapeVisitor: public ShapeVisitor {
+public:
+    ~SelectAllShapeVisitor() {
+        for (auto it = _result.begin(); it != _result.end(); ++ it) {
+            delete *it;
+        }
+    }
+    // SelectShapeVisitor(): _result(nullptr), _constraint(nullptr) {}
+    SelectAllShapeVisitor(ShapeConstraint constraint): _constraint(constraint) {}
+    void visitCircle(Circle* c);
+    void visitRectangle(Rectangle* r);
+    void visitTriangle(Triangle* t);
+    void visitCompoundShape(CompoundShape* cs);
+    std::string getResultInfo();
+    std::list<Shape*> getResult();
+
+private:
+    ShapeConstraint _constraint;
+    std::string _resultInfo;
+    std::list<Shape*> _result;
 };
