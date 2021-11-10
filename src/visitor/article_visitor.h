@@ -2,8 +2,8 @@
 
 #include <string>
 
-class Text; 
 class ListItem; 
+class Text;
 class Paragraph; 
 
 class ArticleVisitor {

@@ -10,19 +10,19 @@ TEST(CaseMarkdownVisitor, TextInfo) {
     t.accept(visitor);
     std::string result = visitor->getResult();
 
-    ASSERT_TRUE("text" == result);
+    ASSERT_TRUE("text\n" == result);
 
     delete visitor;
 }
 
 TEST(CaseMarkdownVisitor, ListItemInfo) {
-    ListItem l("list");
+    ListItem li("list");
 
     MarkdownVisitor* visitor = new MarkdownVisitor();
-    l.accept(visitor);
+    li.accept(visitor);
     std::string result = visitor->getResult();
 
-    ASSERT_TRUE("- list" == result);
+    ASSERT_TRUE("- list\n" == result);
 
     delete visitor;
 }
