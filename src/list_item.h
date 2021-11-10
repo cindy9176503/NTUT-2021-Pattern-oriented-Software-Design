@@ -11,7 +11,7 @@ public:
 
     Iterator* createIterator() override { return new NullIterator(); }
 
-    // void accept(ArticleVisitor* visitor) override {}
+    // void accept(ArticleVisitor* visitor) override { visitor->visitListItem(this); }
 
 private:
     std::string _text;

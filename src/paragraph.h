@@ -4,10 +4,11 @@
 
 #include "article.h"
 #include "text.h"
-#include "iterator/null_iterator.h"
+#include "iterator/iterator.h"
+#include "iterator/compound_iterator.h"
 
 class Paragraph : public Article {
-   public:
+public:
     Paragraph(int level, std::string text):_level(level) {
         if(_level < 1 || _level > 6) { throw "Out of range, 1 <= level <= 6"; }
 
@@ -36,14 +37,14 @@ class Paragraph : public Article {
 
     int getLevel() const override { return _level; }
 
-    Iterator* createIterator() override { return new NullIterator(); }
+    Iterator* createIterator() override { return new CompoundIterator<std::vector<Article*>::iterator>(_content.begin(), _content.end()); }
 
     void add(Article* content) override {
         if(typeid(*content) == typeid(Paragraph) && content -> getLevel() <= _level) { throw "Add lower or equal level paragraph"; }
-        _content.push_back(content); 
+        _content.push_back(content);
     }
 
-    // void accept(ArticleVisitor* visitor) override {}
+    // void accept(ArticleVisitor* visitor) override { visitor->visitParagraph(this); }
 
 private:
     int _level;
