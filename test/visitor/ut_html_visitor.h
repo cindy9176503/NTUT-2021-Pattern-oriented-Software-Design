@@ -14,15 +14,3 @@ TEST(CaseHtmlVisitor, TextInfo) {
 
     delete visitor;
 }
-
-TEST(CaseHtmlVisitor, ListItemInfo) {
-    ListItem li("list");
-
-    HtmlVisitor* visitor = new HtmlVisitor();
-    li.accept(visitor);
-    std::string result = visitor->getResult();
-
-    ASSERT_TRUE("<li>list</li>" == result);
-
-    delete visitor;
-}

@@ -25,7 +25,6 @@ public:
 
     std::string getText() const override { 
         std::string str;
-
         str += _content[0] -> getText();
         
         for(int i = 1; i < _content.size(); i ++) {
