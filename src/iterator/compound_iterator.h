@@ -1,5 +1,8 @@
 #pragma once
 
+#include "../article.h"
+#include "./iterator.h"
+
 template<class ForwardIterator>
 class CompoundIterator : public Iterator {
 public:
