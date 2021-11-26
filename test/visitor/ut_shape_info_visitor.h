@@ -11,7 +11,7 @@ TEST(CaseShapeInfoVisitor, CircleInfo) {
     c.accept(visitor);
     std::string result = visitor->getResult();
 
-    ASSERT_TRUE("Circle (17.57)" == result);
+    ASSERT_TRUE("Circle (17.57)\n" == result);
 
     delete visitor;
 }
@@ -23,7 +23,7 @@ TEST(CaseShapeInfoVisitor, RectangleInfo) {
     r.accept(visitor);
     std::string result = visitor->getResult();
 
-    ASSERT_TRUE("Rectangle (5.00 6.00)" == result);
+    ASSERT_TRUE("Rectangle (5.00 6.00)\n" == result);
 
     delete visitor;
 }
@@ -37,7 +37,7 @@ TEST(CaseShapeInfoVisitor, TriangleInfo) {
     t.accept(visitor);
     std::string result = visitor->getResult();
 
-    ASSERT_TRUE("Triangle ([3.00,4.00] [3.00,0.00])" == result);
+    ASSERT_TRUE("Triangle ([3.00,4.00] [3.00,0.00])\n" == result);
 
     delete visitor;
 }

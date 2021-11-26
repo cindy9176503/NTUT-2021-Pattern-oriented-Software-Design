@@ -13,19 +13,19 @@ public:
     void visitCircle(Circle* circle) {
         int spaceNum = this->_depth * 2;
         for(int i = 0; i<spaceNum; i++) { _result += " "; }
-        _result = _result + circle->info();
+        _result = _result + circle->info() + "\n";
     }
 
     void visitRectangle(Rectangle* rectangle) {
         int spaceNum = this->_depth * 2;
         for(int i = 0; i<spaceNum; i++) { _result += " "; }
-        _result = _result + rectangle->info();
+        _result = _result + rectangle->info() + "\n";
     }
 
     void visitTriangle(Triangle* triangle) {
         int spaceNum = this->_depth * 2;
         for(int i = 0; i<spaceNum; i++) { _result += " "; }
-        _result = _result + triangle->info();
+        _result = _result + triangle->info() + "\n";
     }
 
     void visitCompoundShape(CompoundShape* compoundShape) {
@@ -40,17 +40,17 @@ public:
         Iterator* it = compoundShape->createIterator();
         for (it->first(); !it->isDone(); it->next()) {
             it->currentItem()->accept(this);
-            _result += "\n";
         }
 
         _depth --;
 
         _result = _result + space + "}";
+        if(_depth > 0) { _result += "\n"; }
 
         delete it;
     }
     
-    std::string getResult() {return _result;}
+    std::string getResult() { return _result; }
 
 private:
     int _depth = 0;
