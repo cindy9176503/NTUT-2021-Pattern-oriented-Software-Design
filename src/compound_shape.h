@@ -1,13 +1,13 @@
 #pragma once
 
+#include <iostream>
+#include <list>
+
 #include "./shape.h"
 #include "./iterator/iterator.h"
 #include "./iterator/null_iterator.h"
 #include "./iterator/compound_iterator.h"
-
-#include <list>
-
-
+#include "./visitor/shape_visitor.h"
 
 class CompoundShape : public Shape {
 public:
@@ -49,6 +49,10 @@ public:
         return result;      
     }
 
+    void accept(ShapeVisitor* visitor) {
+        visitor->visitCompoundShape(this);
+    }
+
     Iterator* createIterator() override { return new CompoundIterator<std::list<Shape*>::iterator>(_shapes.begin(), _shapes.end()); }
 
     void addShape(Shape* shape) override { _shapes.push_back(shape); }
@@ -66,10 +70,6 @@ public:
             // }
             // throw "can't find the shape to delete";
         }
-    }
-
-    void accept(ShapeVisitor* visitor) {
-        visitor->visitCompoundShape(this);
     }
 
 private:

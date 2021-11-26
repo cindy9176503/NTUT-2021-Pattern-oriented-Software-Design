@@ -263,5 +263,3 @@ TEST(CaseCompoundShape, AddShape2) {
 
     delete cs, rec, rec2, it;
 }
-
-

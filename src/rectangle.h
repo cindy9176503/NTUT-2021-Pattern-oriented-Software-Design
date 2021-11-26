@@ -1,14 +1,13 @@
 #pragma once
 
-#include "shape.h"
-#include "iterator/null_iterator.h"
-#include "./shape_visitor.h"
+#include <iostream>
 
-#include <cmath>
-#include <sstream>
+#include "./iterator/null_iterator.h"
+#include "./shape.h"
+#include "./visitor/shape_visitor.h"
 
 class Rectangle : public Shape {
-public: 
+public:
     Rectangle(double length, double width) : _length(length), _width(width){
         if(length <= 0) { throw "Not a positive double length"; } 
         else if(width <= 0) { throw "Not a positive double width"; }
@@ -26,11 +25,11 @@ public:
         return info;
     }
 
-    Iterator* createIterator() override { return new NullIterator(); }
-
     void accept(ShapeVisitor* visitor) override {
         visitor->visitRectangle(this); 
     }
+
+    Iterator* createIterator() override { return new NullIterator(); }
 
 private:
     double _length, _width;

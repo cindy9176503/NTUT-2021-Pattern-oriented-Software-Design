@@ -1,12 +1,10 @@
 #pragma once
 
-#include "shape.h"
-#include "iterator/null_iterator.h"
-#include "./shape_visitor.h"
-
-#include <iomanip>
 #include <cmath>
-#include <sstream>
+
+#include "./iterator/null_iterator.h"
+#include "./shape.h"
+#include "./visitor/shape_visitor.h"
 
 class Circle : public Shape {
 public:
@@ -26,11 +24,12 @@ public:
         return info;
     }
 
-    Iterator* createIterator() override { return new NullIterator(); }
-
     void accept(ShapeVisitor* visitor) override { 
         visitor->visitCircle(this); 
     }
+
+    Iterator* createIterator() override { return new NullIterator(); }
+
 private:
     double _radius;
 };

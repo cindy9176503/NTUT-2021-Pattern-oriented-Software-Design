@@ -1,13 +1,14 @@
 #pragma once
 
-#include "two_dimensional_vector.h"
-#include "iterator/null_iterator.h"
-#include "./shape_visitor.h"
-
 #include <cmath>
-#include <sstream>
+#include <iostream>
 
-class Triangle: public Shape {
+#include "./iterator/null_iterator.h"
+#include "./shape.h"
+#include "./two_dimensional_vector.h"
+#include "./visitor/shape_visitor.h"
+
+class Triangle : public Shape {
 public:
     Triangle(TwoDimensionalVector vec1, TwoDimensionalVector vec2) : _vec1(vec1), _vec2(vec2) {
         if(vec1.y() / vec1.x() == vec2.y() / vec2.x()) { throw "Not two non-parallel two dimensional vectors"; }
@@ -26,11 +27,11 @@ public:
         return info;
     }
 
-    Iterator* createIterator() override { return new NullIterator(); }
-
     void accept(ShapeVisitor* visitor) override { 
         visitor->visitTriangle(this); 
     }
+
+    Iterator* createIterator() override { return new NullIterator(); }
 
 private:
     TwoDimensionalVector _vec1, _vec2;

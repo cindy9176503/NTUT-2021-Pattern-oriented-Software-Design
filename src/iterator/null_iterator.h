@@ -1,6 +1,5 @@
 #pragma once
 
-#include "../shape.h"
 #include "./iterator.h"
 
 class NullIterator : public Iterator {
