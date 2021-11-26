@@ -1,13 +1,12 @@
 #pragma once
 
-#include <string>
+#include "iterator/iterator.h"
 
-class Iterator;
 class ShapeVisitor;
 
 class Shape {
-   public:
-    virtual ~Shape(){};
+public:
+    virtual ~Shape() {};
 
     virtual double area() const = 0;
 
@@ -17,9 +16,9 @@ class Shape {
 
     virtual Iterator* createIterator() = 0;
 
+    virtual void addShape(Shape* shape) { throw("method not allowed"); }
+
+    virtual void deleteShape(Shape* shape) { throw("method not allowed"); }
+
     virtual void accept(ShapeVisitor* visitor) = 0;
-
-    virtual void addShape(Shape* shape) { throw "can't add shape"; }
-
-    virtual void deleteShape(Shape* shape) { throw "can't delete shape"; }
 };
