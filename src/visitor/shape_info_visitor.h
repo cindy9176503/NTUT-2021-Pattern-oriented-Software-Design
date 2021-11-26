@@ -44,8 +44,7 @@ public:
 
         _depth --;
 
-        _result = _result + space + "}";
-        if(_depth > 0) { _result += "\n"; }
+        _result = _result + space + "}\n";
 
         delete it;
     }
