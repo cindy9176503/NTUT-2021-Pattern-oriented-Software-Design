@@ -33,7 +33,7 @@ public:
 
         std::string space = "";
         for(int i = 0; i < spaceNum; i ++) { space += " "; }
-        _result = _result + space + "CompoundShape\n" + space + "{\n";
+        _result = _result + space + "CompoundShape{\n";
 
         _depth ++;
 
@@ -50,7 +50,9 @@ public:
         delete it;
     }
     
-    std::string getResult() { return _result; }
+    std::string getResult() {
+        std::cout << _result << std::endl;
+        return _result;}
 
 private:
     int _depth = 0;

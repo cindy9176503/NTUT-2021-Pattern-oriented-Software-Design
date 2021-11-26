@@ -60,7 +60,7 @@ TEST(CaseShapeInfoVisitor, CompoundShapeInfo) {
     cs->accept(visitor);
     std::string result = visitor->getResult();
 
-    ASSERT_EQ("CompoundShape\n{\n  Circle (1.00)\n  Rectangle (5.00 6.00)\n  CompoundShape\n  {\n    Triangle ([3.00,4.00] [3.00,0.00])\n  }\n}", result); 
+    ASSERT_EQ("CompoundShape{\n  Circle (1.00)\n  Rectangle (5.00 6.00)\n  CompoundShape{\n    Triangle ([3.00,4.00] [3.00,0.00])\n  }\n}", result); 
 
     delete cs, cs2, c, r, vec1, vec2, t, visitor, result;
 }
