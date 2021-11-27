@@ -1,5 +1,9 @@
 #include "../src/two_dimensional_vector.h"
 
+TEST(CaseTwoDimensionalVector, Constructor_NoException) {
+    ASSERT_NO_THROW(new TwoDimensionalVector(3.0, 4.0));
+}
+
 TEST(CaseTwoDimensionalVector, x){
     TwoDimensionalVector vec(1.00123, 2.0);
     ASSERT_NEAR(1.000, vec.x(), 0.01);

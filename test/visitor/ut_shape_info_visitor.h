@@ -4,7 +4,7 @@
 #include "../../src/two_dimensional_vector.h"
 #include "../../src/visitor/shape_info_visitor.h"
 
-TEST(CaseShapeInfoVisitor, CircleInfo) {
+TEST(CaseShapeInfoVisitor, VisitCircle) {
     Circle c(17.5678);
 
     ShapeInfoVisitor* visitor = new ShapeInfoVisitor();
@@ -16,7 +16,7 @@ TEST(CaseShapeInfoVisitor, CircleInfo) {
     delete visitor;
 }
 
-TEST(CaseShapeInfoVisitor, RectangleInfo) {
+TEST(CaseShapeInfoVisitor, VisitRectangle) {
     Rectangle r(5.0, 6.0);
 
     ShapeInfoVisitor* visitor = new ShapeInfoVisitor();
@@ -28,7 +28,7 @@ TEST(CaseShapeInfoVisitor, RectangleInfo) {
     delete visitor;
 }
 
-TEST(CaseShapeInfoVisitor, TriangleInfo) {
+TEST(CaseShapeInfoVisitor, VisitTriangle) {
     TwoDimensionalVector vec1(3.0, 4.0);
     TwoDimensionalVector vec2(3.0, 0.0);
     Triangle t(vec1, vec2);
@@ -42,7 +42,7 @@ TEST(CaseShapeInfoVisitor, TriangleInfo) {
     delete visitor;
 }
 
-TEST(CaseShapeInfoVisitor, CompoundShapeInfo) {
+TEST(CaseShapeInfoVisitor, VisitCompoundShape) {
     Shape* cs = new CompoundShape();
     Shape* cs2 = new CompoundShape();
     Shape* c = new Circle(1.0);

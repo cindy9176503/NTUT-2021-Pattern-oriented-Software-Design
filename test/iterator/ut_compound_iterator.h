@@ -1,8 +1,14 @@
 #include "../../src/circle.h"
 #include "../../src/compound_shape.h"
-#include "../../src/iterator/null_iterator.h"
+#include "../../src/iterator/compound_iterator.h"
 
-TEST(CaseCompoundIterator, OneShape_Current) {    
+TEST(CaseCompoundIterator, Constructor_NoException) {
+    CompoundShape* cs = new CompoundShape();
+
+    ASSERT_NO_THROW(cs -> createIterator());
+}
+
+TEST(CaseCompoundIterator, Current) {    
     Circle *c = new Circle(1.0);  
     CompoundShape* cs = new CompoundShape();
     Iterator* it;
@@ -15,7 +21,7 @@ TEST(CaseCompoundIterator, OneShape_Current) {
     delete c, cs, it;
 }
 
-TEST(CaseCompoundIterator, OneShape_First) {    
+TEST(CaseCompoundIterator, First) {    
     Circle *c = new Circle(1.0);  
     CompoundShape* cs = new CompoundShape();
     Iterator* it; 
@@ -23,12 +29,26 @@ TEST(CaseCompoundIterator, OneShape_First) {
     cs -> addShape(c);
     it = cs -> createIterator();
     it -> first();
+
     ASSERT_EQ(c, it -> currentItem());
 
     delete c, cs, it;
 }
 
-TEST(CaseCompoundIterator, OneShape_Next_Exception) {    
+TEST(CaseCompoundIterator, Next_NotIsDone_NoException) {    
+    Circle *c = new Circle(1.0);  
+    CompoundShape* cs = new CompoundShape();
+    Iterator* it;
+    
+    cs -> addShape(c);
+    it = cs -> createIterator();
+
+    ASSERT_NO_THROW(it -> next());
+
+    delete c, cs, it;
+}
+
+TEST(CaseCompoundIterator, Next_IsDone_Exception) {    
     Circle *c = new Circle(1.0);  
     CompoundShape* cs = new CompoundShape();
     Iterator* it;
@@ -37,12 +57,13 @@ TEST(CaseCompoundIterator, OneShape_Next_Exception) {
     it = cs -> createIterator();
 
     it -> next();
+
     ASSERT_ANY_THROW(it -> next());
 
     delete c, cs, it;
 }
 
-TEST(CaseCompoundIterator, OneShape_IsDone) {    
+TEST(CaseCompoundIterator, IsDone) {    
     Circle *c = new Circle(1.0);  
     CompoundShape* cs = new CompoundShape();
     Iterator* it;
@@ -51,12 +72,13 @@ TEST(CaseCompoundIterator, OneShape_IsDone) {
     it = cs -> createIterator();
 
     it -> next();
+
     ASSERT_TRUE(it -> isDone());
 
     delete c, cs, it;
 }
 
-TEST(CaseCompoundIterator, OneShape_IsDone_Current_Exception) {    
+TEST(CaseCompoundIterator, IsDone_Current_Exception) {    
     Circle *c = new Circle(1.0);
     CompoundShape* cs = new CompoundShape();
 
@@ -66,111 +88,17 @@ TEST(CaseCompoundIterator, OneShape_IsDone_Current_Exception) {
     it = cs -> createIterator();
 
     it -> next();
+
     ASSERT_ANY_THROW(it -> currentItem());
 
     delete c, cs, it;
 }
 
-TEST(CaseCompoundIterator, TwoShapes_Current) {    
-    Circle *c = new Circle(1.0);
-    Circle *c2 = new Circle(2.0); 
+TEST(CaseCompoundIterator, CompoundIteratorIsIterator){
     CompoundShape* cs = new CompoundShape();
+    Iterator* it = cs -> createIterator(); 
 
-    Iterator* it;
+    ASSERT_TRUE(typeid(it) == typeid(Iterator*));
 
-    cs -> addShape(c);
-    cs -> addShape(c2);
-    it = cs -> createIterator();
-
-    ASSERT_EQ(c, it -> currentItem());
-
-    delete c, c2, cs, it;
-}
-
-TEST(CaseCompoundIterator, TwoShapes_First) {    
-    Circle *c = new Circle(1.0);
-    Circle *c2 = new Circle(2.0); 
-    CompoundShape* cs = new CompoundShape();
-
-    Iterator* it;
-
-    cs -> addShape(c);
-    cs -> addShape(c2);
-    it = cs -> createIterator();
-
-    it -> first();
-    ASSERT_EQ(c, it -> currentItem());
-
-    delete c, c2, cs, it;
-}
-
-TEST(CaseCompoundIterator, TwoShapes_Next) {    
-    Circle *c = new Circle(1.0);
-    Circle *c2 = new Circle(2.0); 
-    CompoundShape* cs = new CompoundShape();
-
-    Iterator* it;
-
-    cs -> addShape(c);
-    cs -> addShape(c2);
-    it = cs -> createIterator();
-
-    it -> next();
-    ASSERT_EQ(c2, it -> currentItem());
-
-    delete c, c2, cs, it;
-}
-
-TEST(CaseCompoundIterator, TwoShapes_Next2) {    
-    Circle *c = new Circle(1.0);
-    Circle *c2 = new Circle(2.0); 
-    CompoundShape* cs = new CompoundShape();
-
-    Iterator* it;
-
-    cs -> addShape(c);
-    cs -> addShape(c2);
-    it = cs -> createIterator();
-
-    it -> next();
-    it -> next();
-    ASSERT_ANY_THROW(it -> currentItem());
-
-    delete c, c2, cs, it;
-}
-
-TEST(CaseCompoundIterator, TwoShapes_IsDone_True) {    
-    Circle *c = new Circle(1.0);
-    Circle *c2 = new Circle(2.0); 
-    CompoundShape* cs = new CompoundShape();
-
-    Iterator* it;
-
-    cs -> addShape(c);
-    cs -> addShape(c2);
-    it = cs -> createIterator();
-
-    it -> next();
-    it -> next();
-    ASSERT_TRUE(it -> isDone());
-
-    delete c, c2, cs, it;
-}
-
-TEST(CaseCompoundIterator, TwoShapes_IsDone_Current_Exception) {    
-    Circle *c = new Circle(1.0);
-    Circle *c2 = new Circle(2.0);
-    CompoundShape* cs = new CompoundShape();
-
-    Iterator* it;
-
-    cs -> addShape(c);
-    cs -> addShape(c2);
-    it = cs -> createIterator();
-
-    it -> next();
-    it -> next();
-    ASSERT_ANY_THROW(it -> currentItem());
-
-    delete c, c2, cs, it;
+    delete cs, it;
 }

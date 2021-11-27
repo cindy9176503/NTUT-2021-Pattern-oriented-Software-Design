@@ -1,6 +1,10 @@
 #include "../src/circle.h"
 #include "../src/iterator/null_iterator.h"
 
+TEST(CaseCircle, Constructor_NoException) {
+    ASSERT_NO_THROW(new Circle(10.0));
+}
+
 TEST(CaseCircle, Area) {
     Circle c(10.0);
     ASSERT_NEAR(314.159, c.area(), 0.01);
@@ -27,24 +31,20 @@ TEST(CaseCircle, Info) {
 }
 
 TEST(CaseCircle, Info2) {
-    Circle c(17);
-    ASSERT_TRUE("Circle (17.00)" == c.info());
-}
-
-TEST(CaseCircle, Info3) {
     Circle c(1.1);
     ASSERT_TRUE("Circle (1.10)" == c.info());
 }
 
-TEST(CaseCircle, Not_positive_double) {   
+TEST(CaseCircle, Info3) {
+    Circle c(17);
+    ASSERT_TRUE("Circle (17.00)" == c.info());
+}
+
+TEST(CaseCircle, RadiusIsNegative_Exception) {   
     ASSERT_ANY_THROW(Circle c(-5));
 }
 
-TEST(CaseCircle, Not_positive_double2) {   
-    ASSERT_ANY_THROW(Circle c(0));
-}
-
-TEST(CaseCircle, Not_zero_radius) {   
+TEST(CaseCircle, RadiusIsZero_Exception) {   
     ASSERT_ANY_THROW(Circle c(0));
 }
 
@@ -82,9 +82,16 @@ TEST(CaseCircle, AddShape_Exception) {
 }
 
 TEST(CaseCircle, DeleteShape_Exception) { 
-    Circle c(10.0);
-    Circle* c2 = new Circle(10.0);
-    ASSERT_ANY_THROW(c.deleteShape(c2));
+    Circle* c = new Circle(1.0);
+    Circle* c2 = new Circle(2.0);
+    ASSERT_ANY_THROW(c->deleteShape(c2));
 
-    delete c2;
+    delete c, c2;
+}
+
+TEST(CaseCircle, CircleShouldBeAShape) { 
+    Shape* c = new Circle(10.0);
+
+    ASSERT_TRUE(typeid(c) == typeid(Shape*));
+    delete c;
 }
