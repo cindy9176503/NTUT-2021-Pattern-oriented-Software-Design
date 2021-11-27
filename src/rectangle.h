@@ -8,7 +8,7 @@
 
 class Rectangle : public Shape {
 public:
-    Rectangle(double length, double width) : _length(length), _width(width){
+    Rectangle(double length, double width): _length(length), _width(width){
         if(length <= 0) { throw "Not a positive double length"; } 
         else if(width <= 0) { throw "Not a positive double width"; }
     }

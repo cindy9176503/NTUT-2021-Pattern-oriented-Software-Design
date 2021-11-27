@@ -1,14 +1,12 @@
 #pragma once
 
 #include <string>
-
 #include "./iterator.h"
 
 template <class ForwardIterator>
 class CompoundIterator : public Iterator {
 public:
-    CompoundIterator(ForwardIterator begin, ForwardIterator end)
-        : _begin(begin), _end(end), _current(begin) {}
+    CompoundIterator(ForwardIterator begin, ForwardIterator end): _begin(begin), _end(end), _current(begin) {}
 
     void first() override { _current = _begin;}
 

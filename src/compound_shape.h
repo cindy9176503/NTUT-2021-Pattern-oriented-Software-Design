@@ -37,13 +37,9 @@ public:
         return result;  
     }
 
-    std::string info() const override { 
-        return "CompoundShape";      
-    }
+    std::string info() const override { return "CompoundShape"; }
 
-    void accept(ShapeVisitor* visitor) {
-        visitor->visitCompoundShape(this);
-    }
+    void accept(ShapeVisitor* visitor) { visitor->visitCompoundShape(this); }
 
     Iterator* createIterator() override { return new CompoundIterator<std::list<Shape*>::iterator>(_shapes.begin(), _shapes.end()); }
 

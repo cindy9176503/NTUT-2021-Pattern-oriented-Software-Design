@@ -5,7 +5,7 @@
 
 class TwoDimensionalVector {
 public:
-     TwoDimensionalVector(double x, double y) : _x(x), _y(y) {
+     TwoDimensionalVector(double x, double y): _x(x), _y(y) {
         if(_x == 0 && _y == 0) { throw "Not a non-zero vector"; }
     }
 
