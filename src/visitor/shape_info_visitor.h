@@ -50,8 +50,9 @@ public:
     }
     
     std::string getResult() {
-        std::cout << _result << std::endl;
-        return _result;}
+        // std::cout << _result << std::endl;
+        return _result;
+    }
 
 private:
     int _depth = 0;

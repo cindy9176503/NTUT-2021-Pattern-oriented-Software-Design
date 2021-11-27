@@ -3,7 +3,7 @@
 #include "../shape.h"
 
 class Iterator {
-   public:
+public:
     virtual ~Iterator() {}
     virtual void first() = 0;
     virtual Shape* currentItem() const = 0;
