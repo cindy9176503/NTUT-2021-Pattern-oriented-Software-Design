@@ -79,20 +79,22 @@ TEST(CaseCompoundShape, GetInfo) {
     delete cs, c, c2, vec1, vec2, t;
 }
 
-TEST(CaseCompoundShape, GetInfo2) {
+TEST(CaseCompoundShape, GetInfo_OneCompoundShapeEmpty) {
     CompoundShape* cs = new CompoundShape();
+    CompoundShape* cs2 = new CompoundShape();
     Circle* c = new Circle(1.1);
     Rectangle* r = new Rectangle (3.14, 4.00);
 
     cs -> addShape(c);
     cs -> addShape(r);
-
+    cs -> addShape(cs2);
+    
     ASSERT_EQ("CompoundShape\n{\nCircle (1.10)\nRectangle (3.14 4.00)\n}", cs -> info()); 
 
     delete cs, c, r;
 }
 
-// TEST(CaseCompoundShape, GetInfo_Empty_Exception) {
+// TEST(CaseCompoundShape, GetInfo_Empty) {
 //     CompoundShape* cs = new CompoundShape();
 
 //     ASSERT_ANY_THROW(cs -> info());

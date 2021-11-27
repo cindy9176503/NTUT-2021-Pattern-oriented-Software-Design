@@ -38,11 +38,14 @@ public:
     }
 
     std::string info() const override { 
-        // if(!_shapes.size()) { throw "empty"; return 0;}
-        std::string result = "CompoundShape\n{\n";
+        if(!_shapes.size()) { return ""; }
+
+        std::string result = "CompoundShape\n{\n", str = "";
         for (auto it = _shapes.begin(); it != _shapes.end(); ++ it) {
-            result += (*it) -> info();
-            result += "\n";
+            str = (*it) -> info();
+            result += str;
+
+            if(str != "") { result += "\n"; }
         }
         result += "}";
 
