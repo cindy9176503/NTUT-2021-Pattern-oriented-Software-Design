@@ -42,16 +42,14 @@ TEST(CaseCompoundShape, DeleteInnerShapeCorrectly) {
     Rectangle* rec2 = new Rectangle(2.0, 2.0);
     Iterator* it;
 
-    cs -> addShape(rec);
     cs2 -> addShape(rec);
     cs2 -> addShape(rec2);
     cs -> addShape(cs2);
     cs -> deleteShape(rec2);
 
-    ASSERT_NEAR(2.0, cs -> area(), 0.01);
+    ASSERT_NEAR(1.0, cs -> area(), 0.01);
 
-    // delete cs;
-    delete cs2, rec, rec2, it;
+    delete cs, cs2, rec, rec2, it;
 }
 
 TEST(CaseCompoundShape, Empty_Exception) {
@@ -66,41 +64,14 @@ TEST(CaseCompoundShape, GetInfo) {
     CompoundShape* cs = new CompoundShape();
     Circle* c = new Circle(1.0);
     Circle* c2 = new Circle(2.0);
-    TwoDimensionalVector* vec1 = new TwoDimensionalVector(3.0, 4.0);
-    TwoDimensionalVector* vec2 = new TwoDimensionalVector(3.0, 0.0);
-    Triangle* t = new Triangle(*vec1, *vec2);
 
     cs -> addShape(c);
     cs -> addShape(c2);
-    cs -> addShape(t);
 
-    ASSERT_EQ("CompoundShape\n{\nCircle (1.00)\nCircle (2.00)\nTriangle ([3.00,4.00] [3.00,0.00])\n}", cs -> info()); 
+    ASSERT_EQ("CompoundShape", cs -> info()); 
 
-    delete cs, c, c2, vec1, vec2, t;
+    delete cs, c, c2;
 }
-
-TEST(CaseCompoundShape, GetInfo_OneCompoundShapeEmpty) {
-    CompoundShape* cs = new CompoundShape();
-    CompoundShape* cs2 = new CompoundShape();
-    Circle* c = new Circle(1.1);
-    Rectangle* r = new Rectangle (3.14, 4.00);
-
-    cs -> addShape(c);
-    cs -> addShape(r);
-    cs -> addShape(cs2);
-    
-    ASSERT_EQ("CompoundShape\n{\nCircle (1.10)\nRectangle (3.14 4.00)\n}", cs -> info()); 
-
-    delete cs, c, r;
-}
-
-// TEST(CaseCompoundShape, GetInfo_Empty) {
-//     CompoundShape* cs = new CompoundShape();
-
-//     ASSERT_ANY_THROW(cs -> info());
-
-//     delete cs;
-// }
 
 TEST(CaseCompoundShape, DeleteShape_OneShape) {
     CompoundShape* cs = new CompoundShape();

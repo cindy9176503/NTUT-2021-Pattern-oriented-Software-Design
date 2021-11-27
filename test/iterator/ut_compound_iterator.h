@@ -157,7 +157,6 @@ TEST(CaseCompoundIterator, TwoShapes_IsDone_True) {
     delete c, c2, cs, it;
 }
 
-
 TEST(CaseCompoundIterator, TwoShapes_IsDone_Current_Exception) {    
     Circle *c = new Circle(1.0);
     Circle *c2 = new Circle(2.0);

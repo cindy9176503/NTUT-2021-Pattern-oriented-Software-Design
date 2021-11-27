@@ -38,18 +38,7 @@ public:
     }
 
     std::string info() const override { 
-        if(!_shapes.size()) { return ""; }
-
-        std::string result = "CompoundShape\n{\n", str = "";
-        for (auto it = _shapes.begin(); it != _shapes.end(); ++ it) {
-            str = (*it) -> info();
-            result += str;
-
-            if(str != "") { result += "\n"; }
-        }
-        result += "}";
-
-        return result;      
+        return "CompoundShape";      
     }
 
     void accept(ShapeVisitor* visitor) {
