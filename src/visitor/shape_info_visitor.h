@@ -11,25 +11,25 @@
 class ShapeInfoVisitor : public ShapeVisitor {
 public:
     void visitCircle(Circle* circle) {
-        int spaceNum = this->_depth * 2;
+        int spaceNum = _depth * 2;
         for(int i = 0; i<spaceNum; i++) { _result += " "; }
         _result = _result + circle->info() + "\n";
     }
 
     void visitRectangle(Rectangle* rectangle) {
-        int spaceNum = this->_depth * 2;
+        int spaceNum = _depth * 2;
         for(int i = 0; i<spaceNum; i++) { _result += " "; }
         _result = _result + rectangle->info() + "\n";
     }
 
     void visitTriangle(Triangle* triangle) {
-        int spaceNum = this->_depth * 2;
+        int spaceNum = _depth * 2;
         for(int i = 0; i<spaceNum; i++) { _result += " "; }
         _result = _result + triangle->info() + "\n";
     }
 
     void visitCompoundShape(CompoundShape* compoundShape) {
-        int spaceNum = this->_depth * 2;
+        int spaceNum = _depth * 2;
         std::string space = "";
 
         for(int i = 0; i < spaceNum; i ++) { space += " "; }
