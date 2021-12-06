@@ -1,12 +1,5 @@
-#pragma once
-
-#include <string>
-
-class Iterator;
-class ShapeVisitor;
-
 class Shape {
-public:
+   public:
     virtual ~Shape(){};
 
     virtual double area() const = 0;
@@ -19,7 +12,7 @@ public:
 
     virtual void accept(ShapeVisitor* visitor) = 0;
 
-    virtual void addShape(Shape* shape) { throw "can't add shape"; }
+    virtual void addShape(Shape* shape) { }
 
-    virtual void deleteShape(Shape* shape) { throw "can't delete shape"; }
+    virtual void deleteShape(Shape* shape) { }
 };
