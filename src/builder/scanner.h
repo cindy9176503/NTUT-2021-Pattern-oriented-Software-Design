@@ -21,7 +21,6 @@ public:
             }
             if(result == "") { 
                 pos ++;
-                break;
             }else{
                 break;
             }
@@ -39,7 +38,6 @@ public:
                     result += _input[pos];
                     startFind = true;
                 }
-                break;
             }else{
                 if((_input[pos] <= '9' && _input[pos] >= '0') || _input[pos] == '.') {
                     result += _input[pos];
