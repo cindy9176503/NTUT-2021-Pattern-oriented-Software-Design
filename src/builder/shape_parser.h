@@ -11,17 +11,15 @@ class ShapeParser{
 public:
     // `filePath` is a relative path of makefile
     ShapeParser(std::string filePath) {
-        // std::ifstream ifs;
-        // char _buffer[256] = {0};
+        std::ifstream ifs(filePath);
+        char _buffer[256] = {0};
 
-        // if(ifs(filePath)) {
-        //     ifs.read(_buffer, sizeof(_buffer));
-        //     ifs.close();
-        //     _scanner = new Scanner(_buffer);
-        // }else{
-        _scanner = new Scanner(filePath);
-        // }
+        if(ifs) {
+            ifs.read(_buffer, sizeof(_buffer));
+            ifs.close();
+        }
         
+        _scanner = new Scanner(_buffer);
         parse();
     }
 
