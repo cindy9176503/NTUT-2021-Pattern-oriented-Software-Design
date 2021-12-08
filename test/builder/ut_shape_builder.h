@@ -34,7 +34,19 @@ TEST(CaseShapeBuilder, BuildTriangle) {
     delete builder, result;
 }
 
-TEST(CaseShapeBuilder, BuildCompoundShape) {
+TEST(CaseShapeBuilder, BuildEmptyCompound) {
+    ShapeBuilder* builder = new ShapeBuilder();
+
+    builder->buildCompoundBegin();
+    builder->buildCompoundEnd();
+    Shape* result = builder->getShape();
+
+    ASSERT_NEAR(0, result->area(), 0.01);
+
+    delete builder, result;
+}
+
+TEST(CaseShapeBuilder, BuildSimpleCompound) {
     ShapeBuilder* builder = new ShapeBuilder();
 
     builder->buildCompoundBegin();
@@ -48,7 +60,7 @@ TEST(CaseShapeBuilder, BuildCompoundShape) {
     delete builder, result;
 }
 
-TEST(CaseBuilder, BuildComplexCompoundShape){
+TEST(CaseBuilder, BuildComplexCompound){
     ShapeBuilder* builder = new ShapeBuilder();
 
     builder->buildCompoundBegin();
@@ -64,5 +76,3 @@ TEST(CaseBuilder, BuildComplexCompoundShape){
 
     delete builder;
 }
-
-

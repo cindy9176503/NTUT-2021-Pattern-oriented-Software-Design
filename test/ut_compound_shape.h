@@ -126,14 +126,6 @@ TEST(CaseCompoundShape, DeleteShape_DeleteALL_IsDoneTRUE) {
     delete cs, c, it;
 }
 
-TEST(CaseCompoundShape, Empty_Exception) {
-    CompoundShape* cs = new CompoundShape();
-
-    ASSERT_ANY_THROW(cs -> area());
-
-    delete cs;
-}
-
 TEST(CaseCompoundShape, CompoundShapeShouldBeAShape) { 
     Shape* cs = new CompoundShape();
 

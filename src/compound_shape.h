@@ -17,8 +17,7 @@ public:
         }
     }
 
-    double area() const override { 
-        if(!_shapes.size()) { throw "empty"; return 0;}
+    double area() const override {
         double result = 0;
 
         for (auto it = _shapes.begin(); it != _shapes.end(); ++ it) {
@@ -28,7 +27,6 @@ public:
     }
 
     double perimeter() const override { 
-        if(!_shapes.size()) { throw "empty"; return 0;}
         double result = 0;
 
         for (auto it = _shapes.begin(); it != _shapes.end(); ++ it) {

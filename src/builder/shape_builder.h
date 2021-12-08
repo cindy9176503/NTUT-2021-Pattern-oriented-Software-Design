@@ -31,14 +31,18 @@ public:
     void buildCompoundEnd() {
         std::list<Shape*> components;
         Shape* top = _shapes.top();
+
         while(typeid(*top) != typeid(CompoundShape) ||
              (typeid(*top) == typeid(CompoundShape) && !top->createIterator()->isDone())) {
             components.push_back(top);
             _shapes.pop();
             top = _shapes.top();
         }
-        for(auto it = components.rbegin() ; it != components.rend() ; it ++){
-            top->addShape(*it);
+    
+        if(!components.empty()) {
+            for(auto it = components.rbegin(); it != components.rend(); it ++) {
+                top->addShape(*it);
+            }
         }
     }
 
