@@ -1,6 +1,14 @@
 // you don't need to modify the class
+
+#pragma once
+
+class Circle;
+class Rectangle;
+class Triangle;
+class CompoundShape;
+
 class ShapeVisitor {
-   public:
+public:
     virtual ~ShapeVisitor(){};
 
     virtual void visitCircle(Circle* circle) = 0;
@@ -11,6 +19,6 @@ class ShapeVisitor {
     
     virtual void visitCompoundShape(CompoundShape* compoundShape) = 0;
 
-   protected:
+protected:
     ShapeVisitor(){};
 };

@@ -1,6 +1,11 @@
 // you don't need to modify the class
+
+#pragma once
+
+#include "../shape.h"
+
 class Iterator {
-   public:
+public:
     virtual ~Iterator() {}
 
     virtual void first() = 0;
