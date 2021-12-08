@@ -1,7 +1,7 @@
 #include "../../src/shape.h"
 #include "../../src/builder/shape_builder.h"
 
-TEST(CaseShapeBuilder, BuildCircle) {
+TEST(CaseBuilder, BuildCircle) {
     ShapeBuilder* builder = new ShapeBuilder();
 
     builder->buildCircle(1.0);
@@ -12,7 +12,7 @@ TEST(CaseShapeBuilder, BuildCircle) {
     delete builder, result;
 }
 
-TEST(CaseShapeBuilder, BuildRectangle) {
+TEST(CaseBuilder, BuildRectangle) {
     ShapeBuilder* builder = new ShapeBuilder();
 
     builder->buildRectangle(1.0, 2.0);
@@ -23,7 +23,7 @@ TEST(CaseShapeBuilder, BuildRectangle) {
     delete builder, result;
 }
 
-TEST(CaseShapeBuilder, BuildTriangle) {
+TEST(CaseBuilder, BuildTriangle) {
     ShapeBuilder* builder = new ShapeBuilder();
 
     builder->buildTriangle(3.0, 4.0, 3.0, 0.0);
@@ -34,7 +34,7 @@ TEST(CaseShapeBuilder, BuildTriangle) {
     delete builder, result;
 }
 
-TEST(CaseShapeBuilder, BuildEmptyCompound) {
+TEST(CaseBuilder, BuildEmptyCompound) {
     ShapeBuilder* builder = new ShapeBuilder();
 
     builder->buildCompoundBegin();
@@ -46,7 +46,7 @@ TEST(CaseShapeBuilder, BuildEmptyCompound) {
     delete builder, result;
 }
 
-TEST(CaseShapeBuilder, BuildSimpleCompound) {
+TEST(CaseBuilder, BuildSimpleCompound) {
     ShapeBuilder* builder = new ShapeBuilder();
 
     builder->buildCompoundBegin();
