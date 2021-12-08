@@ -34,7 +34,7 @@ public:
 
         for(int i = 0; i < spaceNum; i ++) { space += " "; }
 
-        _result = _result + space + "CompoundShape{\n";
+        _result = _result + space + "CompoundShape {\n";
         _depth ++;
 
         Iterator* it = compoundShape->createIterator();
