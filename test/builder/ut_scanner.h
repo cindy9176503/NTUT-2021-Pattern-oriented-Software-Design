@@ -1,17 +1,17 @@
 #include "../../src/shape.h"
 #include "../../src/builder/shape_builder.h"
 
-// TEST(CaseScanner, BuildCircle) {
-//     std::string input = "I Circle eee ,tt{t3.14159a";
-//     Scanner scanner(input);
-//     std::string first = scanner.next();
-//     std::string second = scanner.next();
-//     double third = scanner.nextDouble(); 
+TEST(CaseScanner, BuildCircle) {
+    std::string input = "I Circle eee ,tt{t3.14159a";
+    Scanner scanner(input);
+    std::string first = scanner.next();
+    std::string second = scanner.next();
+    double third = scanner.nextDouble(); 
 
-//     ASSERT_TRUE(first == "Circle");
-//     ASSERT_TRUE(second == ",");
-//     ASSERT_TRUE(third == 3.14159);
-// }
+    ASSERT_TRUE(first == "Circle");
+    ASSERT_TRUE(second == ",");
+    ASSERT_TRUE(third == 3.14159);
+}
 
 // TEST(CaseScanner, BuildRectangle) {
 //     std::string input = "Rectangle (3.14, 4.00)";
