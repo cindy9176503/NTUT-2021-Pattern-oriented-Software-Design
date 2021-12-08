@@ -11,44 +11,39 @@ public:
     std::string next() {
         std::string result = "";
         
-        // while(pos != _input.length()) {
-        //     for(auto token: tokenList) {
-        //         if(_input.compare(pos, token.length(), token) == 0) {
-        //             pos = pos + token.length();
-        //             result = token;
-        //             break;
-        //         }
-        //     }
-        //     if(result == "") { 
-        //         pos ++;
-        //     }else{
-        //         break;
-        //     }
-        // }
+        while(!isDone()) {
+            for(auto token: tokenList) {
+                if(_input.compare(pos, token.length(), token) == 0) {
+                    pos = pos + token.length();
+                    result = token;
+                    return result;
+                }
+            }
+            pos ++;
+        }
         return result;
     }
 
     double nextDouble() {
-        return 1.0;
-        // std::string result = "";
-        // bool startFind = false;
+        std::string result = "";
+        bool startFind = false;
 
-        // while(pos != _input.length()){
-        //     if(!startFind) {
-        //         if(_input[pos] <= '9' && _input[pos] >= '0') {
-        //             result += _input[pos];
-        //             startFind = true;
-        //         }
-        //     }else{
-        //         if((_input[pos] <= '9' && _input[pos] >= '0') || _input[pos] == '.') {
-        //             result += _input[pos];
-        //         }else{
-        //             break;
-        //         }           
-        //     }
-        //     pos ++;
-        // }
-        // return std::stod(result);
+        while(!isDone()) {
+            if(!startFind) {
+                if(_input[pos] <= '9' && _input[pos] >= '0') {
+                    result += _input[pos];
+                    startFind = true;
+                }
+            }else{
+                if((_input[pos] <= '9' && _input[pos] >= '0') || _input[pos] == '.') {
+                    result += _input[pos];
+                }else{
+                    break;
+                }           
+            }
+            pos ++;
+        }
+        return std::stod(result);
     }
 
     bool isDone() { 
