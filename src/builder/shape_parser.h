@@ -33,7 +33,7 @@ public:
         
         while(!_scanner->isDone()){
             std::string token = _scanner->next();
-            if(token == "Circle"){
+            if(token == "Circle" || token == "circle"){
                 _builder->buildCircle(_scanner->nextDouble());
             }else if(token == "Rectangle"){
                 _builder->buildRectangle(_scanner->nextDouble(), _scanner->nextDouble());
