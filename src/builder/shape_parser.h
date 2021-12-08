@@ -13,7 +13,7 @@ public:
     ShapeParser(std::string filePath) {
         std::ifstream ifs(filePath);
         char _buffer[256] = {0};
-        
+
         if(ifs) {
             ifs.read(_buffer, sizeof(_buffer));
             ifs.close();

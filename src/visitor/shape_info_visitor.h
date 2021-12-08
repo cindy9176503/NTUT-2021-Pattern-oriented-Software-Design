@@ -7,7 +7,6 @@
 #include "../triangle.h"
 #include "../compound_shape.h"
 #include "./shape_visitor.h"
-#include "../iterator/iterator.h"
 
 class ShapeInfoVisitor : public ShapeVisitor {
 public:

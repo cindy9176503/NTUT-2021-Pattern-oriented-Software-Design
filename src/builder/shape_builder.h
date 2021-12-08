@@ -53,8 +53,6 @@ public:
                 top->addShape(*it);
             }
         }
-
-        delete top;
     }
 
     Shape* getShape() {
