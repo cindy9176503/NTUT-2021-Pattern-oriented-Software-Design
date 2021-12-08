@@ -10,6 +10,15 @@
 
 class ShapeBuilder {
 public:
+    ~ShapeBuilder() {
+        while (!_shapes.empty())
+        {
+            auto item = _shapes.top();
+            _shapes.pop();
+            delete item;
+        }
+    }
+
     void buildCircle(double radius) {
         _shapes.push(new Circle(radius));
     }

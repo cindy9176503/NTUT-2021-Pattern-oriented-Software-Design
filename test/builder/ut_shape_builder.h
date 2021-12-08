@@ -41,7 +41,7 @@ TEST(CaseShapeBuilder, BuildEmptyCompound) {
     builder->buildCompoundEnd();
     Shape* result = builder->getShape();
 
-    ASSERT_NEAR(0, result->area(), 0.01);
+    ASSERT_NEAR(0.0, result->area(), 0.01);
 
     delete builder, result;
 }
