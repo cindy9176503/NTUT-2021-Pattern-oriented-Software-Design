@@ -11,12 +11,12 @@
 class ShapeBuilder {
 public:
     ~ShapeBuilder() {
-        while (!_shapes.empty())
-        {
-            auto item = _shapes.top();
-            _shapes.pop();
-            delete item;
-        }
+        // while (!_shapes.empty())
+        // {
+        //     auto item = _shapes.top();
+        //     _shapes.pop();
+        //     delete item;
+        // }
     }
 
     void buildCircle(double radius) {
@@ -53,6 +53,8 @@ public:
                 top->addShape(*it);
             }
         }
+
+        delete top;
     }
 
     Shape* getShape() {
