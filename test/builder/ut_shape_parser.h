@@ -1,5 +1,5 @@
+#include "../../src/shape.h"
 #include "../../src/builder/shape_parser.h"
-#include "../../src/builder/scanner.h"
 
 TEST(CaseParser, ParseCircle){
     std::string input = "./test/data/circle.txt";

@@ -3,10 +3,11 @@
 #include <string>
 
 #include "../circle.h"
-#include "../compound_shape.h"
 #include "../rectangle.h"
 #include "../triangle.h"
+#include "../compound_shape.h"
 #include "./shape_visitor.h"
+#include "../iterator/iterator.h"
 
 class ShapeInfoVisitor : public ShapeVisitor {
 public:

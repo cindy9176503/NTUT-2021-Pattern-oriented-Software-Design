@@ -12,7 +12,8 @@ public:
     // `filePath` is a relative path of makefile
     ShapeParser(std::string filePath) {
         std::ifstream ifs(filePath);
-
+        char _buffer[256] = {0};
+        
         if(ifs) {
             ifs.read(_buffer, sizeof(_buffer));
             ifs.close();
@@ -54,5 +55,4 @@ public:
 private:
     ShapeBuilder* _builder;
     Scanner* _scanner;
-    char _buffer[256] = {0};
 };
