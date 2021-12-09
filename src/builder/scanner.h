@@ -21,6 +21,8 @@ public:
             }
             pos ++;
         }
+
+        std::cout << result <<std::endl;
         return result;
     }
 
@@ -43,6 +45,8 @@ public:
             }
             pos ++;
         }
+
+        std::cout << result <<std::endl;
         return std::stod(result);
     }
 

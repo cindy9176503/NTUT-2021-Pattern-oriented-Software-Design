@@ -24,8 +24,8 @@ public:
     }
 
     ~ShapeParser() {
-        delete _builder;
-        delete _scanner;
+        // delete _builder;
+        // delete _scanner;
     }
 
     void parse() {
@@ -34,17 +34,16 @@ public:
             std::string token = _scanner->next();
             if(token == "Circle"){
                 _builder->buildCircle(_scanner->nextDouble());
+            }else if(token == "Rectangle"){
+                _builder->buildRectangle(_scanner->nextDouble(), _scanner->nextDouble());
+            }else if(token == "Triangle"){
+                _builder->buildTriangle(_scanner->nextDouble(), _scanner->nextDouble(), _scanner->nextDouble(), _scanner->nextDouble());
+            }else if(token == "CompoundShape"){
+                _scanner->next(); // ignore {
+                _builder->buildCompoundBegin();
+            }else if(token == "}"){
+                _builder->buildCompoundEnd();
             }
-            // else if(token == "Rectangle"){
-            //     _builder->buildRectangle(_scanner->nextDouble(), _scanner->nextDouble());
-            // }else if(token == "Triangle"){
-            //     _builder->buildTriangle(_scanner->nextDouble(), _scanner->nextDouble(), _scanner->nextDouble(), _scanner->nextDouble());
-            // }else if(token == "CompoundShape"){
-            //     _scanner->next(); // ignore {
-            //     _builder->buildCompoundBegin();
-            // }else if(token == "}"){
-            //     _builder->buildCompoundEnd();
-            // }
         }
     }
 

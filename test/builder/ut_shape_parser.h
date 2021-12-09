@@ -6,7 +6,7 @@ TEST(CaseParser, ParseCircle){
     ShapeParser* parser = new ShapeParser(input);
     Shape* result = parser->getShape();
 
-    ASSERT_NEAR(1.0*M_PI, result->area(), 0.01);
+    ASSERT_NEAR(5.0*5.0*M_PI, result->area(), 0.01);
 
     delete parser, result;
 }
