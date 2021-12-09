@@ -40,25 +40,21 @@ TEST(CaseScanner, BuildTriangle) {
 TEST(CaseScanner, BuildEmptyCompound) {
     std::string input = "CompoundShape {}";
     Scanner scanner(input);
-    std::string first = scanner.next();
-    std::string second = scanner.next();
-    std::string third = scanner.next();
-
-    ASSERT_TRUE(first == "CompoundShape");
-    ASSERT_TRUE(second == "{");
-    ASSERT_TRUE(third == "}");
+    scanner.next();
+    scanner.next();
+    scanner.next();
+    ASSERT_TRUE(scanner.isDone());
 }
 
 TEST(CaseScanner, BuildSimpleCompound) {
-    std::string input = "CompoundShape{Circle(1.0)Rectangle(3.14 4.00)}";
+    std::string input = "CompoundShape{Circle(1.0)Rectangle(3.14 4.00)}\n";
     Scanner scanner(input);
-    std::string first = scanner.next();
-    std::string second = scanner.next();
-    double third = scanner.nextDouble();
-
-    ASSERT_TRUE(first == "CompoundShape");
-    ASSERT_TRUE(second == "{");
-    ASSERT_TRUE(third == 1.0);
+    scanner.nextDouble();
+    scanner.nextDouble();
+    scanner.nextDouble();
+    scanner.next();
+    scanner.next();
+    ASSERT_TRUE(scanner.isDone());
 }
 
 TEST(CaseScanner, BuildComplexCompound){

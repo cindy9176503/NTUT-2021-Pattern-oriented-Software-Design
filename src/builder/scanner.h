@@ -11,7 +11,7 @@ public:
     std::string next() {       
         if(isDone()) { throw "Already points to the end position"; }
         
-        while(!isDone()) {
+        while(pos != _input.length()) {
             for(auto token: tokenList) {
                 if(_input.compare(pos, token.length(), token) == 0) {
                     pos = pos + token.length();
@@ -30,7 +30,7 @@ public:
         std::string result = "";
         bool startFindDouble = false, startFindDot = false;
 
-        while(!isDone()) {
+        while(pos != _input.length()) {
             if(!startFindDouble) {
                 if(_input[pos] <= '9' && _input[pos] >= '0') {
                     result += _input[pos];
@@ -54,6 +54,10 @@ public:
     }
 
     bool isDone() { 
+        while(_input[pos] == ' ' || _input[pos] == '\n' || _input[pos] == '\t') {
+            pos ++;
+        }
+
         return pos == _input.length();
     }
 
