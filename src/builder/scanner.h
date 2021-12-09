@@ -16,7 +16,7 @@ public:
                 if(_input.compare(pos, token.length(), token) == 0) {
                     pos = pos + token.length();
 
-                    std::cout << token <<std::endl;
+                    // std::cout << token <<std::endl;
                     return token;
                 }
             }
@@ -49,7 +49,7 @@ public:
             pos ++;
         }
 
-        std::cout << result <<std::endl;
+        // std::cout << result <<std::endl;
         return std::stod(result);
     }
 
