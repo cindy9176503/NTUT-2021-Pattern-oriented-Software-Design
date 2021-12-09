@@ -27,6 +27,8 @@ public:
     }
 
     double nextDouble() {
+        if(isDone()) { throw "Already points to the end position"; }
+        
         std::string result = "";
         bool startFindDouble = false, startFindDot = false;
 

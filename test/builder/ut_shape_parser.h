@@ -1,7 +1,7 @@
 #include "../../src/shape.h"
 #include "../../src/builder/shape_parser.h"
 
-TEST(CaseParser, ParseCircle){
+TEST(CaseParser, BuildCircle){
     std::string input = "./test/data/circle.txt";
     ShapeParser* parser = new ShapeParser(input);
     Shape* result = parser->getShape();
@@ -11,7 +11,7 @@ TEST(CaseParser, ParseCircle){
     delete parser, result;
 }
 
-TEST(CaseParser, ParseRectangle){
+TEST(CaseParser, BuildRectangle){
     std::string input = "./test/data/rectangle.txt";
     ShapeParser* parser = new ShapeParser(input);
     Shape* result = parser->getShape();
@@ -21,7 +21,7 @@ TEST(CaseParser, ParseRectangle){
     delete parser, result;
 }
 
-TEST(CaseParser, ParseTriangle){
+TEST(CaseParser, BuildTriangle){
     std::string input = "./test/data/triangle.txt";
     ShapeParser* parser = new ShapeParser(input);
     Shape* result = parser->getShape();
@@ -31,7 +31,7 @@ TEST(CaseParser, ParseTriangle){
     delete parser, result;
 }
 
-TEST(CaseParser, EmptyCompound){
+TEST(CaseParser, BuildEmptyCompound){
     std::string input = "./test/data/empty_compound.txt";
 
     ShapeParser* parser = new ShapeParser(input);
@@ -42,7 +42,7 @@ TEST(CaseParser, EmptyCompound){
     delete parser, result;
 }
 
-TEST(CaseParser, SimpleCompound){
+TEST(CaseParser, BuildSimpleCompound){
     std::string input = "./test/data/simple_compound.txt";
     ShapeParser* parser = new ShapeParser(input);
     Shape* result = parser->getShape();
@@ -52,7 +52,7 @@ TEST(CaseParser, SimpleCompound){
     delete parser, result;
 }
 
-TEST(CaseParser, ComplexCompound){
+TEST(CaseParser, BuildComplexCompound){
     std::string input = "./test/data/complex_compound.txt";
     ShapeParser* parser = new ShapeParser(input);
     Shape* result = parser->getShape();
