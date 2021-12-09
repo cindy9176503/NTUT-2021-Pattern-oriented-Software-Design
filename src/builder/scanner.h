@@ -8,7 +8,9 @@ class Scanner {
 public:
     Scanner(std::string input):_input(input) {}
 
-    std::string next() {        
+    std::string next() {       
+        if(isDone()) { throw "Already points to the end position"; }
+        
         while(!isDone()) {
             for(auto token: tokenList) {
                 if(_input.compare(pos, token.length(), token) == 0) {
@@ -26,13 +28,13 @@ public:
 
     double nextDouble() {
         std::string result = "";
-        bool startFind = false, startFindDot = false;
+        bool startFindDouble = false, startFindDot = false;
 
         while(!isDone()) {
-            if(!startFind) {
+            if(!startFindDouble) {
                 if(_input[pos] <= '9' && _input[pos] >= '0') {
                     result += _input[pos];
-                    startFind = true;
+                    startFindDouble = true;
                 }
             }else{
                 if((_input[pos] <= '9' && _input[pos] >= '0')) {
