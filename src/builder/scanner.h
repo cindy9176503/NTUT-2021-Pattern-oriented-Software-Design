@@ -8,29 +8,25 @@ class Scanner {
 public:
     Scanner(std::string input):_input(input) {}
 
-    std::string next() {
-        std::string result = "";
-        
+    std::string next() {        
         while(!isDone()) {
             for(auto token: tokenList) {
                 if(_input.compare(pos, token.length(), token) == 0) {
                     pos = pos + token.length();
-                    result = token;
 
-                    std::cout << result <<std::endl;
-                    return result;
+                    std::cout << token <<std::endl;
+                    return token;
                 }
             }
             pos ++;
         }
 
-        std::cout << result <<std::endl;
-        return result;
+        return "";
     }
 
     double nextDouble() {
         std::string result = "";
-        bool startFind = false;
+        bool startFind = false, startFindDot = false;
 
         while(!isDone()) {
             if(!startFind) {
@@ -39,8 +35,11 @@ public:
                     startFind = true;
                 }
             }else{
-                if((_input[pos] <= '9' && _input[pos] >= '0') || _input[pos] == '.') {
+                if((_input[pos] <= '9' && _input[pos] >= '0')) {
                     result += _input[pos];
+                }else if(_input[pos] == '.' && !startFindDot){
+                    result += _input[pos];
+                    startFindDot = true;
                 }else{
                     break;
                 }           

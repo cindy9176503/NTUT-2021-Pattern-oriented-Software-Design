@@ -20,6 +20,7 @@ public:
         }
         
         _scanner = new Scanner(_buffer);
+        _builder = new ShapeBuilder();
         parse();
     }
 
@@ -29,9 +30,9 @@ public:
     }
 
     void parse() {
-        _builder = new ShapeBuilder();
         while(!_scanner->isDone()){
             std::string token = _scanner->next();
+
             if(token == "Circle"){
                 _builder->buildCircle(_scanner->nextDouble());
             }else if(token == "Rectangle"){
