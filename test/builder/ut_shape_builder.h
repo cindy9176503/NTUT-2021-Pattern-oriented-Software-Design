@@ -74,5 +74,5 @@ TEST(CaseBuilder, BuildComplexCompound){
 
     ASSERT_NEAR(5.0, result->createIterator()->currentItem()->area(), 0.01);
 
-    delete builder, result;
+    delete builder;
 }
