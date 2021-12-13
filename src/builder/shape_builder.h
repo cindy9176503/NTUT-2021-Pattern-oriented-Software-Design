@@ -11,14 +11,12 @@
 class ShapeBuilder {
 public:
     ~ShapeBuilder() {
-        // segmentation fault
-
-        // while (!_shapes.empty())
-        // {
-        //     auto item = _shapes.top();
-        //     _shapes.pop();
-        //     delete item;
-        // }
+        while (!_shapes.empty())
+        {
+            auto item = _shapes.top();
+            _shapes.pop();
+            // delete item; // segmentation fault
+        }
     }
 
     void buildCircle(double radius) {
