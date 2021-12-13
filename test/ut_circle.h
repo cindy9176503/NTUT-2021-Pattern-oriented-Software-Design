@@ -2,7 +2,7 @@
 #include "../src/iterator/null_iterator.h"
 
 TEST(CaseCircle, Constructor_NoException) {
-    ASSERT_NO_THROW(new Circle(10.0));
+    ASSERT_NO_THROW(Circle c(10.0));
 }
 
 TEST(CaseCircle, Area) {
@@ -50,7 +50,11 @@ TEST(CaseCircle, RadiusIsZero_Exception) {
 
 TEST(CaseCircle, IsNullIterator) {
     Circle c(10.0);
-    ASSERT_EQ(typeid(NullIterator), typeid(*c.createIterator()));
+    Iterator* it = c.createIterator();
+
+    ASSERT_EQ(typeid(NullIterator), typeid(*it));
+
+    delete it;
 }
 
 TEST(CaseCircle, NullIterator_isDoneTrue) {
@@ -65,17 +69,26 @@ TEST(CaseCircle, NullIterator_First_Exception) {
 
 TEST(CaseCircle, NullIterator_Next_Exception) {
     Circle c(10.0);
-    ASSERT_ANY_THROW(c.createIterator()->next());
+    Iterator* it = c.createIterator();
+
+    ASSERT_ANY_THROW(it->next());
+
+    delete it;
 }
 
 TEST(CaseCircle, NullIterator_Current_Exception) {
     Circle c(10.0);
-    ASSERT_ANY_THROW(c.createIterator()->next());
+    Iterator* it = c.createIterator();
+    Shape* result;
+    ASSERT_ANY_THROW(result = it->currentItem());
+
+    delete it, result;
 }
 
 TEST(CaseCircle, AddShape_Exception) { 
     Circle c(10.0);
     Circle* c2 = new Circle(10.0);
+
     ASSERT_ANY_THROW(c.addShape(c2));
 
     delete c2;
@@ -84,6 +97,7 @@ TEST(CaseCircle, AddShape_Exception) {
 TEST(CaseCircle, DeleteShape_Exception) { 
     Circle* c = new Circle(1.0);
     Circle* c2 = new Circle(2.0);
+    
     ASSERT_ANY_THROW(c->deleteShape(c2));
 
     delete c, c2;
@@ -93,5 +107,15 @@ TEST(CaseCircle, CircleShouldBeAShape) {
     Shape* c = new Circle(10.0);
 
     ASSERT_TRUE(typeid(c) == typeid(Shape*));
+
     delete c;
+}
+
+TEST(CaseCircle, Accept) {
+    Shape* c = new Circle(10.0);
+    ShapeInfoVisitor* visitor = new ShapeInfoVisitor();
+
+    ASSERT_NO_THROW(c->accept(visitor));
+
+    delete c, visitor;
 }

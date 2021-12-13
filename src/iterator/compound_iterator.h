@@ -11,7 +11,7 @@ public:
     void first() override { _current = _begin;}
 
     Shape* currentItem() const override { 
-        if(isDone()) { throw("is done"); return NULL;}
+        if(isDone()) { throw("is done"); }
         else { return *_current; }
     }
 

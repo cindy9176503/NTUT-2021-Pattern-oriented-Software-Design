@@ -4,8 +4,11 @@
 
 TEST(CaseCompoundIterator, Constructor_NoException) {
     CompoundShape* cs = new CompoundShape();
+    Iterator* it;
 
-    ASSERT_NO_THROW(cs -> createIterator());
+    ASSERT_NO_THROW(it = cs -> createIterator());
+
+    delete cs, it;
 }
 
 TEST(CaseCompoundIterator, Current) {    
@@ -15,10 +18,11 @@ TEST(CaseCompoundIterator, Current) {
 
     cs -> addShape(c);
     it = cs -> createIterator();
-    
-    ASSERT_EQ(c, it -> currentItem());
+    Shape* result = it -> currentItem();
 
-    delete c, cs, it;
+    ASSERT_EQ(c, result);
+
+    delete c, cs, it, result;
 }
 
 TEST(CaseCompoundIterator, First) {    
@@ -29,10 +33,11 @@ TEST(CaseCompoundIterator, First) {
     cs -> addShape(c);
     it = cs -> createIterator();
     it -> first();
+    Shape* result = it -> currentItem();
 
-    ASSERT_EQ(c, it -> currentItem());
+    ASSERT_EQ(c, result);
 
-    delete c, cs, it;
+    delete c, cs, it, result;
 }
 
 TEST(CaseCompoundIterator, Next_NotIsDone_NoException) {    
@@ -81,17 +86,16 @@ TEST(CaseCompoundIterator, IsDone) {
 TEST(CaseCompoundIterator, IsDone_Current_Exception) {    
     Circle *c = new Circle(1.0);
     CompoundShape* cs = new CompoundShape();
-
     Iterator* it;
+    Shape* result;
 
     cs -> addShape(c);
     it = cs -> createIterator();
-
     it -> next();
 
-    ASSERT_ANY_THROW(it -> currentItem());
-
-    delete c, cs, it;
+    ASSERT_ANY_THROW(result = it -> currentItem());
+    
+    delete c, cs, it, result;
 }
 
 TEST(CaseCompoundIterator, CompoundIteratorIsIterator){

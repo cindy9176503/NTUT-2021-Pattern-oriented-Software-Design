@@ -2,18 +2,24 @@
 #include "../../src/iterator/null_iterator.h"
 
 TEST(CaseNullIterator, Constructor_NoException) {
-    ASSERT_NO_THROW(new NullIterator());
-}
+    Iterator* it;
 
-TEST(CaseNullIterator, CurrentItem_Exception) {
-    Iterator* it = new NullIterator();
-    ASSERT_ANY_THROW(it->currentItem());
+    ASSERT_NO_THROW(it = new NullIterator());
 
     delete it;
 }
 
+TEST(CaseNullIterator, CurrentItem_Exception) {
+    Iterator* it = new NullIterator();
+    Shape* result;
+    ASSERT_ANY_THROW(result = it->currentItem());
+
+    delete it, result;
+}
+
 TEST(CaseNullIterator, First_Exception) {
     Iterator* it = new NullIterator();
+
     ASSERT_ANY_THROW(it->first());
 
     delete it;
@@ -21,6 +27,7 @@ TEST(CaseNullIterator, First_Exception) {
 
 TEST(CaseNullIterator, Next_Exception) {
     Iterator* it = new NullIterator();
+
     ASSERT_ANY_THROW(it->next());
 
     delete it;
@@ -28,6 +35,7 @@ TEST(CaseNullIterator, Next_Exception) {
 
 TEST(CaseNullIterator, IsDone_True){
     Iterator* it = new NullIterator();
+
     ASSERT_TRUE(it->isDone());
 
     delete it;
@@ -35,6 +43,7 @@ TEST(CaseNullIterator, IsDone_True){
 
 TEST(CaseNullIterator, NullIteratorIsIterator){
     Iterator* it = new NullIterator();
+    
     ASSERT_TRUE(typeid(it) == typeid(Iterator*));
 
     delete it;

@@ -7,7 +7,11 @@
 #include "../src/visitor/shape_info_visitor.h"
 
 TEST(CaseCompoundShape, Constructor_NoException) {
-    ASSERT_NO_THROW(new CompoundShape());
+    Shape* cs;
+    
+    ASSERT_NO_THROW(cs = new CompoundShape());
+    
+    delete cs;
 }
 
 TEST(CaseCompoundShape, Area) {
@@ -60,13 +64,15 @@ TEST(CaseCompoundShape, CreateIterator) {
     Circle *c = new Circle(1.0);  
     CompoundShape* cs = new CompoundShape();
     Iterator* it;
+    Shape* result;
 
     cs -> addShape(c);
     it = cs -> createIterator();
-    
-    ASSERT_EQ(c, it -> currentItem());
+    result = it -> currentItem();
 
-    delete c, cs, it;
+    ASSERT_EQ(c, result);
+
+    delete c, cs, it, result;
 }
 
 TEST(CaseCompoundShape, AddShape) {
@@ -121,6 +127,7 @@ TEST(CaseCompoundShape, DeleteShape_DeleteALL_IsDoneTRUE) {
     cs -> deleteShape(c);
 
     it = cs -> createIterator();
+    
     ASSERT_TRUE(it -> isDone());
 
     delete cs, c, it;

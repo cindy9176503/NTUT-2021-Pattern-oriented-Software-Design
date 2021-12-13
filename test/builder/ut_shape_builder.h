@@ -70,9 +70,10 @@ TEST(CaseBuilder, BuildComplexCompound){
     builder->buildCompoundEnd();
     builder->buildRectangle(3.0, 3.0);
     builder->buildCompoundEnd();
-    Shape* result = builder->getShape();
+    Shape* result = builder->getShape()->createIterator()->currentItem();
 
-    ASSERT_NEAR(5.0, result->createIterator()->currentItem()->area(), 0.01);
+
+    ASSERT_NEAR(5.0, result->area(), 0.01);
 
     delete builder;
 }

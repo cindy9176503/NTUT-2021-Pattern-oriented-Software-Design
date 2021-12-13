@@ -4,7 +4,7 @@
 TEST(CaseTriangle, Constructor_NoException) {
     TwoDimensionalVector vec1(3.0, 4.0);
     TwoDimensionalVector vec2(3.0, 0.0);
-    ASSERT_NO_THROW(new Triangle(vec1, vec2));
+    ASSERT_NO_THROW(Triangle t(vec1, vec2));
 }
 
 TEST(CaseTriangle, Area) {    
@@ -65,40 +65,56 @@ TEST(CaseTriangle, IsNullIterator) {
     TwoDimensionalVector vec1(3.0, 4.0);
     TwoDimensionalVector vec2(3.0, 0.0); 
     Triangle t(vec1, vec2);
+    Iterator *it = t.createIterator();
 
-    ASSERT_EQ(typeid(NullIterator) ,typeid(*t.createIterator()));
+    ASSERT_EQ(typeid(NullIterator) ,typeid(*it));
+
+    delete it;
 }
 
 TEST(CaseTriangle, NullIterator_isDoneTrue) {
     TwoDimensionalVector vec1(3.0, 4.0);
     TwoDimensionalVector vec2(3.0, 0.0); 
     Triangle t(vec1, vec2);
+    Iterator *it = t.createIterator();
 
-    ASSERT_TRUE(t.createIterator()->isDone());
+    ASSERT_TRUE(it->isDone());
+
+    delete it;
 }
 
 TEST(CaseTriangle, NullIterator_First_Exception) {
     TwoDimensionalVector vec1(3.0, 4.0);
     TwoDimensionalVector vec2(3.0, 0.0);  
     Triangle t(vec1, vec2);
+    Iterator *it = t.createIterator();
 
-    ASSERT_ANY_THROW(t.createIterator()->first());
+    ASSERT_ANY_THROW(it->first());
+
+    delete it;
 }
 
 TEST(CaseTriangle, NullIterator_Next_Exception) {
     TwoDimensionalVector vec1(3.0, 4.0);
     TwoDimensionalVector vec2(3.0, 0.0);   
     Triangle t(vec1, vec2);
+    Iterator *it = t.createIterator();
 
-    ASSERT_ANY_THROW(t.createIterator()->next());
+    ASSERT_ANY_THROW(it->next());
+
+    delete it;
 }
 
 TEST(CaseTriangle, NullIterator_Current_Exception) {
     TwoDimensionalVector vec1(3.0, 4.0);
     TwoDimensionalVector vec2(3.0, 0.0);   
     Triangle t(vec1, vec2);
+    Iterator *it = t.createIterator();
+    Shape* result;
 
-    ASSERT_ANY_THROW(t.createIterator()->next());
+    ASSERT_ANY_THROW(result = it->currentItem());
+
+    delete it, result;
 }
 
 TEST(CaseTriangle, AddShape_Exception) { 
@@ -131,4 +147,15 @@ TEST(CaseTriangle, TriangleShouldBeAShape) {
     ASSERT_TRUE(typeid(t) == typeid(Shape*));
 
     delete t;
+}
+
+TEST(CaseTriangle, Accept) {
+    TwoDimensionalVector vec1(3.0, 4.0);
+    TwoDimensionalVector vec2(3.0, 0.0);  
+    Shape* t = new Triangle(vec1, vec2);
+    ShapeInfoVisitor* visitor = new ShapeInfoVisitor();
+
+    ASSERT_NO_THROW(t->accept(visitor));
+
+    delete t, visitor;
 }

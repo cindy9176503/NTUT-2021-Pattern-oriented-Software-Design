@@ -2,7 +2,7 @@
 #include "../src/iterator/null_iterator.h"
 
 TEST(CaseRectangle, Constructor_NoException) {
-    ASSERT_NO_THROW(new Rectangle(5.0, 10.0));
+    ASSERT_NO_THROW(Rectangle r(5.0, 10.0));
 }
 
 TEST(CaseRectangle, Area) {
@@ -53,7 +53,11 @@ TEST(CaseRectangle, WidthIsZero_Exception) {
 
 TEST(CaseRectangle, IsNullIterator) {
     Rectangle r(1.0, 2.0);
-    ASSERT_EQ(typeid(NullIterator), typeid(*r.createIterator()));
+    Iterator* it = r.createIterator();
+
+    ASSERT_EQ(typeid(NullIterator), typeid(*it));
+
+    delete it;
 }
 
 TEST(CaseRectangle, NullIterator_isDoneTrue) {
@@ -79,6 +83,7 @@ TEST(CaseRectangle, NullIterator_Current_Exception) {
 TEST(CaseRectangle, AddShape_Exception) { 
     Rectangle r(1.0, 2.0);
     Shape* r2 = new Rectangle(1.0, 2.0);
+    
     ASSERT_ANY_THROW(r.addShape(r2));
 
     delete r2;
@@ -87,6 +92,7 @@ TEST(CaseRectangle, AddShape_Exception) {
 TEST(CaseRectangle, DeleteShape_Exception) { 
     Rectangle r(1.0, 2.0);
     Shape* r2 = new Rectangle(1.0, 2.0);
+
     ASSERT_ANY_THROW(r.deleteShape(r2));
 
     delete r2;
@@ -96,5 +102,15 @@ TEST(CaseRectangle, RectangleShouldBeAShape) {
     Shape* r = new Rectangle(1.0, 2.0);
 
     ASSERT_TRUE(typeid(r) == typeid(Shape*));
+
     delete r;
+}
+
+TEST(CaseRectangle, Accept) {
+    Shape* r = new Rectangle(1.0, 2.0);
+    ShapeInfoVisitor* visitor = new ShapeInfoVisitor();
+
+    ASSERT_NO_THROW(r->accept(visitor));
+
+    delete r, visitor;
 }
