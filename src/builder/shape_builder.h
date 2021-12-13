@@ -15,8 +15,7 @@ public:
         {
             auto item = _shapes.top();
             _shapes.pop();
-            std::cout<<item->info()<<std::endl;
-            delete item; // segmentation fault
+            // delete item; // segmentation fault
         }
     }
 
