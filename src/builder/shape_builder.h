@@ -13,9 +13,7 @@ public:
     ~ShapeBuilder() {
         while (!_shapes.empty())
         {
-            auto item = _shapes.top();
             _shapes.pop();
-            // delete item; // segmentation fault
         }
     }
 
