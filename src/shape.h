@@ -6,7 +6,7 @@ class Iterator;
 class ShapeVisitor;
 
 class Shape {
-public:
+   public:
     virtual ~Shape(){};
 
     virtual double area() const = 0;
