@@ -32,6 +32,7 @@ public:
     }
 
     void parse() {
+        _builder->buildCircle(1.0);
         /*while(!_scanner->isDone()){
             std::string token = _scanner->next();
 
