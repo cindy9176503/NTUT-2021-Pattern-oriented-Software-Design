@@ -32,12 +32,11 @@ public:
     }
 
     void parse() {
-        while(!_scanner->isDone()){
+        /*while(!_scanner->isDone()){
             std::string token = _scanner->next();
 
             if(token == "Circle"){
-                // _builder->buildCircle(_scanner->nextDouble());
-                _builder->buildCircle(1.0);
+                _builder->buildCircle(_scanner->nextDouble());
             }else if(token == "Rectangle"){
                 _builder->buildRectangle(_scanner->nextDouble(), _scanner->nextDouble());
             }else if(token == "Triangle"){
@@ -48,7 +47,7 @@ public:
             }else if(token == "}"){
                 _builder->buildCompoundEnd();
             }
-        }
+        }*/
     }
 
     Shape* getShape() {
