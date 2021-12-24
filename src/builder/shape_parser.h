@@ -26,14 +26,14 @@ public:
     }
 
     ~ShapeParser() {
-        delete _builder;
-        delete _scanner;
-        delete _result;
+        // delete _builder;
+        // delete _scanner;
+        // delete _result;
     }
 
     void parse() {
         _builder->buildCircle(1.0);
-        /*while(!_scanner->isDone()){
+        while(!_scanner->isDone()){
             std::string token = _scanner->next();
 
             if(token == "Circle"){
@@ -48,7 +48,7 @@ public:
             }else if(token == "}"){
                 _builder->buildCompoundEnd();
             }
-        }*/
+        }
     }
 
     Shape* getShape() {
