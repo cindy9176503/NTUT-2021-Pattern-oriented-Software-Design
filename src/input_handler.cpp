@@ -3,14 +3,18 @@
 #include "input_handler.h"
 
 void InputHandler::handle() {
-    int instruction;
+    char instruction;
 
     while (isContinued) {
         printEditorInstructions();
 
         std::cin >> instruction;
 
-        handleEditorInstructions(instruction);
+        if(instruction <= '6' && instruction >= '1') {
+            handleEditorInstructions(instruction - '0');
+        }else{
+            std::cout << "Invalid instruction. Please try again." << std::endl;
+        }
     }
 }
 
@@ -37,43 +41,45 @@ void InputHandler::handleEditorInstructions(int instruction) {
         addTriangle();
         break;
     case 4:
-        builder->buildCompoundBegin();
-        std::cout << "Compound{\n";
         compoundNum ++;
+        builder->buildCompoundBegin();
         addCompound();
         break;
     case 5:
         save();
-        builder->reset();
         break;
     case 6:
         builder->reset();
         isContinued = false; 
         break;
-    default:
-        std::cout << "Invalid instruction. Please try again." << std::endl;
-        break;
     }
 }
 
 void InputHandler::save() {
-    Shape* shape = builder->getShape();
-    ShapeInfoVisitor* visitor = new ShapeInfoVisitor();
-    std::string result;
-       
-    shape->accept(visitor);
-    result = visitor->getResult();
+    try{
+        Shape* shape = builder->getShape();
 
-    std::cout << result << std::endl;
-    std::cout << "Save complete." << std::endl;
+        ShapeInfoVisitor* visitor = new ShapeInfoVisitor();
+        std::string result;
+        
+        shape->accept(visitor);
+        result = visitor->getResult();
 
-    delete shape, visitor;
+        std::cout << result << std::endl;
+        std::cout << "Save complete." << std::endl;
+
+        delete visitor;
+    }catch(const char* e) {
+        std::cout << "output"<< std::endl;
+    }
+
+    builder->reset();
 }
 
 void InputHandler::addCircle() {
     double radius;
 
-    std::cout << "Please enter the information of circle:\nRadius of circle:";
+    std::cout << "Please enter the information of circle: \nRadius of circle: ";
     std::cin >> radius;
        
     try{
@@ -87,14 +93,14 @@ void InputHandler::addCircle() {
 void InputHandler::addRectangle() {
     double height, width;
 
-    std::cout << "Please enter the information of retangle:" << std::endl;
-    std::cout << "Width of rectangle:";
+    std::cout << "Please enter the information of retangle: " << std::endl;
+    std::cout << "Width of rectangle: ";
     std::cin >> width;
-    std::cout << "Height of rectangle:";
+    std::cout << "Height of rectangle: ";
     std::cin >> height;
        
     try{
-        builder->buildRectangle(height, width);
+        builder->buildRectangle(width, height);
         std::cout << "Rectangle added." << std::endl;
     }catch (const char* e) {
         std::cout << "Invalid argument. Please try again."<< std::endl;
@@ -104,14 +110,14 @@ void InputHandler::addRectangle() {
 void InputHandler::addTriangle() {
     double x1, y1, x2, y2;
 
-    std::cout << "Please enter the information of triangle:" << std::endl;
-    std::cout << "X1 of triangle:";
+    std::cout << "Please enter the information of triangle: " << std::endl;
+    std::cout << "X1 of triangle: ";
     std::cin >> x1;
-    std::cout << "Y1 of triangle:";
+    std::cout << "Y1 of triangle: ";
     std::cin >> y1;
-    std::cout << "X2 of triangle:";
+    std::cout << "X2 of triangle: ";
     std::cin >> x2;
-    std::cout << "Y2 of triangle:";
+    std::cout << "Y2 of triangle: ";
     std::cin >> y2;
        
     try{
@@ -123,7 +129,7 @@ void InputHandler::addTriangle() {
 }
 
 void InputHandler::printCompoundInstructions() {
-    std::cout << "Please enter the following instruction number to build the compound:"<< std::endl;
+    std::cout << "Please enter the following instruction number to build the compound: "<< std::endl;
     std::cout << "1. 'add circle': to add a circle"<< std::endl;
     std::cout << "2. 'add rectangle': to add a rectangle"<< std::endl;
     std::cout << "3. 'add triangle': to add a triangle"<< std::endl;
@@ -131,50 +137,46 @@ void InputHandler::printCompoundInstructions() {
     std::cout << "5. 'exit': to exit the program"<< std::endl;
 }
 
-void InputHandler::handleCompoundInstructions(int instruction) {
-    switch (instruction)
+void InputHandler::handleCompoundInstructions(int compoundInstruction) {
+    switch (compoundInstruction)
     {
     case 1:
         addCircle();
+        addCompound();
         break;
     case 2:
         addRectangle();
+        addCompound();
         break;
     case 3:
         addTriangle();
-        break;
-    case 4:
-        std::cout << "Compound{\n";
-        builder->buildCompoundBegin();
-        compoundNum ++;
         addCompound();
         break;
-    case 5:        
+    case 4:
+        compoundNum ++;
+        builder->buildCompoundBegin();
+        addCompound();
+        break;
+    case 5:
         while (compoundNum > 0) {
             compoundNum --;
-            std::cout << "}";
             builder->buildCompoundEnd();
         }
-        std::cout << compoundNum << std::endl;
-        handle();
+        std::cout << "Compound added." << std::endl;
         break;
     default:
         std::cout << "Invalid instruction. Please try again." << std::endl;
         handle();
         break;
     }
-
-    if(instruction != 4) {
-        addCompound();
-    }
 }
 
 void InputHandler::addCompound() {
-    int instruction;
+    int compoundInstruction;
 
     printCompoundInstructions();
 
-    std::cin >> instruction;
+    std::cin >> compoundInstruction;
 
-    handleCompoundInstructions(instruction);
+    handleCompoundInstructions(compoundInstruction);
 }

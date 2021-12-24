@@ -50,8 +50,7 @@ public:
             }
             pos ++;
         }
-
-        std::cout << std::stod(result) <<std::endl;
+        
         return std::stod(result);
     }
 

@@ -1,7 +1,7 @@
 #include "../../src/shape.h"
 #include "../../src/builder/shape_builder.h"
 
-TEST(CaseShapeBuilder, MultiBuilderNeedEqual) {
+TEST(CaseShapeBuilder, GetInstanceShouldHaveSameInstance) {
     ShapeBuilder* builder = ShapeBuilder::getInstance();
     ShapeBuilder* builder1 = ShapeBuilder::getInstance();
 

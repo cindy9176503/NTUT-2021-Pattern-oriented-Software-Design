@@ -29,8 +29,8 @@ public:
         _shapes.push(new Circle(radius));
     }
 
-    void buildRectangle(double length, double width) {
-        _shapes.push(new Rectangle(length, width));
+    void buildRectangle(double width, double height) {
+        _shapes.push(new Rectangle(width, height));
     }
 
     void buildTriangle(double x1, double y1, double x2, double y2) { 
@@ -62,11 +62,18 @@ public:
     }
 
     Shape* getShape() {
-        return _shapes.top();
+        if(_shapes.empty()){
+            throw("stack is empty");
+        }else{
+            return _shapes.top();
+        }
     }
 
     void reset() {
         instance = nullptr;
+        while(!_shapes.empty()) {
+            _shapes.pop();
+        }
     }
 
 private:
