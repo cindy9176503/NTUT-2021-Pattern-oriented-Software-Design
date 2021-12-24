@@ -11,7 +11,7 @@
 #include "../two_dimensional_vector.h"
 
 class ShapeBuilder {
-   public:
+public:
     static ShapeBuilder* getInstance() {}
 
     ~ShapeBuilder() {}
@@ -30,6 +30,10 @@ class ShapeBuilder {
 
     void reset() {}
 
-   private:
-    ShapeBuilder(){};
+private:
+    ShapeBuilder() {
+        std::cout << "Singleton constructor\n";
+    };
+
+   static ShapeBuilder instance;
 };

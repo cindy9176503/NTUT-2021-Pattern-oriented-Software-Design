@@ -3,24 +3,62 @@
 #include <iostream>
 #include <list>
 
-#include "./iterator/compound_iterator.h"
 #include "./shape.h"
+#include "./iterator/iterator.h"
+#include "./iterator/null_iterator.h"
+#include "./iterator/compound_iterator.h"
+#include "./visitor/shape_visitor.h"
 
 class CompoundShape : public Shape {
-   public:
-    ~CompoundShape() {}
+public:
+    ~CompoundShape() {
+        for(Shape* s : _shapes){
+            delete s;
+        }
+    }
 
-    double area() const override {}
+    double area() const override {
+        double result = 0;
 
-    double perimeter() const override {}
+        for (auto it = _shapes.begin(); it != _shapes.end(); ++ it) {
+            result += (*it) -> area();
+        }
+        return result; 
+    }
 
-    std::string info() const override {}
+    double perimeter() const override { 
+        double result = 0;
 
-    void accept(ShapeVisitor* visitor) override {}
+        for (auto it = _shapes.begin(); it != _shapes.end(); ++ it) {
+            result += (*it) -> perimeter();
+        }
+        return result;  
+    }
 
-    Iterator* createIterator() override {}
+    std::string info() const override { return "CompoundShape"; }
 
-    void addShape(Shape* shape) override {}
+    void accept(ShapeVisitor* visitor) { visitor->visitCompoundShape(this); }
 
-    void deleteShape(Shape* shape) override {}
+    Iterator* createIterator() override { return new CompoundIterator<std::list<Shape*>::iterator>(_shapes.begin(), _shapes.end()); }
+
+    void addShape(Shape* shape) override { _shapes.push_back(shape); }
+
+    void deleteShape(Shape* shape) override {
+        for (auto del_it = _shapes.begin(); del_it != _shapes.end(); del_it ++) {
+            if (*del_it == shape) {
+                delete *del_it;
+                _shapes.erase(del_it);
+                break;
+            }else{
+                Iterator *shapeIt = (*del_it)->createIterator();
+                if(!shapeIt->isDone()) {
+                    (*del_it)->deleteShape(shape);
+                    delete shapeIt;
+                }
+            }
+        }
+    }
+
+private:
+    std::list<Shape*> _shapes;
 };

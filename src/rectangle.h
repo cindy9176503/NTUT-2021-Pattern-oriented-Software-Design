@@ -4,18 +4,33 @@
 
 #include "./iterator/null_iterator.h"
 #include "./shape.h"
+#include "./visitor/shape_visitor.h"
 
 class Rectangle : public Shape {
-   public:
-    Rectangle(double length, double width) {}
+public:
+    Rectangle(double length, double width): _length(length), _width(width){
+        if(length <= 0) { throw "Not a positive double length"; } 
+        else if(width <= 0) { throw "Not a positive double width"; }
+    }
 
-    double area() const override {}
+    double area() const override { return _length * _width; }
 
-    double perimeter() const override {}
+    double perimeter() const override { return (_length + _width) * 2; }
+    
+    std::string info() const override {
+        std::stringstream stream1, stream2;
+        stream1 << std::fixed << std::setprecision(2) << _length;
+        stream2 << std::fixed << std::setprecision(2) << _width;
+        std::string info = "Rectangle (" + stream1.str() + " " + stream2.str() + ")";
+        return info;
+    }
 
-    std::string info() const override {}
+    void accept(ShapeVisitor* visitor) override {
+        visitor->visitRectangle(this); 
+    }
 
-    void accept(ShapeVisitor* visitor) override {}
+    Iterator* createIterator() override { return new NullIterator(); }
 
-    Iterator* createIterator() override {}
+private:
+    double _length, _width;
 };
