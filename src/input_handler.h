@@ -8,10 +8,10 @@
 #include "./visitor/shape_info_visitor.h"
 
 class InputHandler {
-   public:
+public:
     void handle();
 
-   private:
+private:
     void printEditorInstructions();
     void handleEditorInstructions(int instruction);
     void save();
