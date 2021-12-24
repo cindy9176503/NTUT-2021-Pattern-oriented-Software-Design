@@ -7,8 +7,6 @@ TEST(CaseShapeBuilder, MultiBuilderNeedEqual) {
 
     ASSERT_EQ(builder, builder1);
 
-    builder->reset();
-    builder1->reset();
     delete builder, builder1;
 }
 
@@ -49,7 +47,6 @@ TEST(CaseShapeBuilder, BuildTriangle) {
 
     ASSERT_NEAR(6.0, result->area(), 0.01);
 
-    builder->reset();
     delete builder, result;
 }
 
@@ -62,7 +59,6 @@ TEST(CaseShapeBuilder, BuildEmptyCompound) {
 
     ASSERT_NEAR(0.0, result->area(), 0.01);
 
-    builder->reset();
     delete builder, result;
 }
 
@@ -77,7 +73,6 @@ TEST(CaseShapeBuilder, BuildSimpleCompound) {
 
     ASSERT_NEAR(4, result->area(), 0.01);
 
-    builder->reset();
     delete builder, result;
 }
 
@@ -95,6 +90,5 @@ TEST(CaseShapeBuilder, BuildComplexCompound){
 
     ASSERT_NEAR(5.0, result->area(), 0.01);
 
-    builder->reset();
     delete builder;
 }

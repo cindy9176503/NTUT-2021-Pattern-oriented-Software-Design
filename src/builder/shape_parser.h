@@ -26,9 +26,8 @@ public:
     }
 
     ~ShapeParser() {
-        // delete _builder;
-        // delete _scanner;
-        // delete _result;
+        delete _scanner;
+        delete _result;
     }
 
     void parse() {

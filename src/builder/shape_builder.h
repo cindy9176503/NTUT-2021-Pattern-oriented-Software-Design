@@ -71,7 +71,6 @@ public:
 
 private:
     ShapeBuilder() {
-        std::cout << "Singleton constructor\n";
     };
 
     inline static ShapeBuilder* instance  = nullptr;
