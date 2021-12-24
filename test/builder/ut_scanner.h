@@ -2,7 +2,7 @@
 #include "../../src/builder/scanner.h"
 
 TEST(CaseScanner, IsDone_True) {
-    std::string input = "Circle (1.0)\n";
+    std::string input = "Circle (1.0) ";
     Scanner scanner(input);
     scanner.nextDouble();
     scanner.next();
@@ -27,7 +27,7 @@ TEST(CaseScanner, ScanCircle) {
 }
 
 TEST(CaseScanner, ScanRectangle) {
-    std::string input = "Rectangle (3.14, 4.00)";
+    std::string input = "Rectangle (3.14, 4.00) ";
     Scanner scanner(input);
 
     ASSERT_TRUE("Rectangle" == scanner.next());
