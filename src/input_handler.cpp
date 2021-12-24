@@ -5,8 +5,7 @@
 void InputHandler::handle() {
     int instruction;
 
-    while (isContinued)
-    {
+    while (isContinued) {
         printEditorInstructions();
 
         std::cin >> instruction;
@@ -38,24 +37,37 @@ void InputHandler::handleEditorInstructions(int instruction) {
         addTriangle();
         break;
     case 4:
-        handleCompoundInstructions(instruction);
+        builder->buildCompoundBegin();
+        std::cout << "Compound{\n";
+        compoundNum ++;
+        addCompound();
         break;
     case 5:
-        printCompoundInstructions();
+        save();
+        builder->reset();
         break;
     case 6:
-        isContinued = false;
         builder->reset();
+        isContinued = false; 
         break;
     default:
         std::cout << "Invalid instruction. Please try again." << std::endl;
-        handle();
         break;
     }
 }
 
 void InputHandler::save() {
+    Shape* shape = builder->getShape();
+    ShapeInfoVisitor* visitor = new ShapeInfoVisitor();
+    std::string result;
+       
+    shape->accept(visitor);
+    result = visitor->getResult();
 
+    std::cout << result << std::endl;
+    std::cout << "Save complete." << std::endl;
+
+    delete shape, visitor;
 }
 
 void InputHandler::addCircle() {
@@ -66,6 +78,7 @@ void InputHandler::addCircle() {
        
     try{
         builder->buildCircle(radius);
+        std::cout << "Circle added." << std::endl;
     }catch (const char* e) {
         std::cout << "Invalid argument. Please try again."<< std::endl;
     }
@@ -82,6 +95,7 @@ void InputHandler::addRectangle() {
        
     try{
         builder->buildRectangle(height, width);
+        std::cout << "Rectangle added." << std::endl;
     }catch (const char* e) {
         std::cout << "Invalid argument. Please try again."<< std::endl;
     }
@@ -102,14 +116,19 @@ void InputHandler::addTriangle() {
        
     try{
         builder->buildTriangle(x1, y1, x2, y2);
+        std::cout << "Triangle added." << std::endl;
     }catch (const char* e) {
-        std::cout << "Invalid argument. Please try again."<< std::endl;
+        std::cout << "Invalid argument. Please try again." << std::endl;
     }
 }
 
 void InputHandler::printCompoundInstructions() {
-    std::string result = builder->getShape()->info();
-    std::cout << result << std::endl;
+    std::cout << "Please enter the following instruction number to build the compound:"<< std::endl;
+    std::cout << "1. 'add circle': to add a circle"<< std::endl;
+    std::cout << "2. 'add rectangle': to add a rectangle"<< std::endl;
+    std::cout << "3. 'add triangle': to add a triangle"<< std::endl;
+    std::cout << "4. 'add compound': to add a compound"<< std::endl;
+    std::cout << "5. 'exit': to exit the program"<< std::endl;
 }
 
 void InputHandler::handleCompoundInstructions(int instruction) {
@@ -125,9 +144,18 @@ void InputHandler::handleCompoundInstructions(int instruction) {
         addTriangle();
         break;
     case 4:
+        std::cout << "Compound{\n";
+        builder->buildCompoundBegin();
+        compoundNum ++;
         addCompound();
         break;
-    case 5:
+    case 5:        
+        while (compoundNum > 0) {
+            compoundNum --;
+            std::cout << "}";
+            builder->buildCompoundEnd();
+        }
+        std::cout << compoundNum << std::endl;
         handle();
         break;
     default:
@@ -135,17 +163,16 @@ void InputHandler::handleCompoundInstructions(int instruction) {
         handle();
         break;
     }
+
+    if(instruction != 4) {
+        addCompound();
+    }
 }
 
 void InputHandler::addCompound() {
     int instruction;
 
-    std::cout << "Please enter the following instruction number to build the compound:"<< std::endl;
-    std::cout << "1. 'add circle': to add a circle"<< std::endl;
-    std::cout << "2. 'add rectangle': to add a rectangle"<< std::endl;
-    std::cout << "3. 'add triangle': to add a triangle"<< std::endl;
-    std::cout << "4. 'add compound': to add a compound"<< std::endl;
-    std::cout << "5. 'exit': to exit the program"<< std::endl;
+    printCompoundInstructions();
 
     std::cin >> instruction;
 

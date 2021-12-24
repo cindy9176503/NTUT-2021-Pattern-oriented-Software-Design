@@ -24,4 +24,5 @@ private:
 
     ShapeBuilder* builder = ShapeBuilder::getInstance();
     bool isContinued = true;
+    int compoundNum = 0;
 };
