@@ -63,7 +63,7 @@ public:
 
     Shape* getShape() {
         if(_shapes.empty()){
-            throw("stack is empty");
+            return nullptr;
         }else{
             return _shapes.top();
         }

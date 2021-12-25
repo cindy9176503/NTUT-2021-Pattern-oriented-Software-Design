@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 
 #include "input_handler.h"
 
@@ -19,7 +20,7 @@ void InputHandler::handle() {
 }
 
 void InputHandler::printEditorInstructions() {
-    std::cout << "Please enter the following instruction number number to start building:" << std::endl;
+    std::cout << "Please enter the following instruction number to start building:" << std::endl;
     std::cout << "1. 'add circle': to add a circle" << std::endl;
     std::cout << "2. 'add rectangle': to add a rectangle" << std::endl;
     std::cout << "3. 'add triangle': to add a triangle" << std::endl;
@@ -56,23 +57,36 @@ void InputHandler::handleEditorInstructions(int instruction) {
 }
 
 void InputHandler::save() {
-    try{
-        Shape* shape = builder->getShape();
+    std::string result = {}, fileName;
+    std::ofstream ofs;
 
+    Shape* shape = builder->getShape();
+
+    std::cout << "Please enter the file name to save the shape: " << std::endl;
+    std::cin >> fileName;
+
+    if(shape == nullptr) {
+        std::cout << "No shape, txt is empty.\n" << std::endl;
+    }else{
         ShapeInfoVisitor* visitor = new ShapeInfoVisitor();
-        std::string result;
-        
+    
         shape->accept(visitor);
         result = visitor->getResult();
 
-        std::cout << result << std::endl;
-        std::cout << "Save complete." << std::endl;
-
         delete visitor;
-    }catch(const char* e) {
-        std::cout << "output"<< std::endl;
     }
 
+    std::cout << "Save complete." << std::endl;
+
+    ofs.open(fileName + ".txt");
+
+    if (!ofs.is_open()) {
+        std::cout << "Failed to open file.\n";
+    } else {
+        ofs << result;
+        ofs.close();
+    }
+    
     builder->reset();
 }
 
@@ -158,11 +172,17 @@ void InputHandler::handleCompoundInstructions(int compoundInstruction) {
         addCompound();
         break;
     case 5:
-        while (compoundNum > 0) {
-            compoundNum --;
-            builder->buildCompoundEnd();
-        }
         std::cout << "Compound added." << std::endl;
+
+        compoundNum --;
+        std::cout << "compoundNum = " << compoundNum << std::endl;
+        builder->buildCompoundEnd();
+        if(compoundNum == 0) {
+            handle();
+        }else{
+            addCompound();
+        }
+
         break;
     default:
         std::cout << "Invalid instruction. Please try again." << std::endl;
@@ -175,8 +195,10 @@ void InputHandler::addCompound() {
     int compoundInstruction;
 
     printCompoundInstructions();
-
+    
     std::cin >> compoundInstruction;
+    // std::cin.clear();
+    // std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
     handleCompoundInstructions(compoundInstruction);
 }
