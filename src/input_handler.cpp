@@ -4,18 +4,14 @@
 #include "input_handler.h"
 
 void InputHandler::handle() {
-    char instruction;
+    int instruction;
 
     while (isContinued) {
         printEditorInstructions();
 
         std::cin >> instruction;
 
-        if(instruction <= '6' && instruction >= '1') {
-            handleEditorInstructions(instruction - '0');
-        }else{
-            std::cout << "Invalid instruction. Please try again." << std::endl;
-        }
+        handleEditorInstructions(instruction);
     }
 }
 
@@ -52,6 +48,9 @@ void InputHandler::handleEditorInstructions(int instruction) {
     case 6:
         builder->reset();
         isContinued = false; 
+        break;
+    default:
+        std::cout << "Invalid instruction. Please try again." << std::endl;
         break;
     }
 }
@@ -175,14 +174,13 @@ void InputHandler::handleCompoundInstructions(int compoundInstruction) {
         std::cout << "Compound added." << std::endl;
 
         compoundNum --;
-        std::cout << "compoundNum = " << compoundNum << std::endl;
         builder->buildCompoundEnd();
+
         if(compoundNum == 0) {
             handle();
         }else{
             addCompound();
         }
-
         break;
     default:
         std::cout << "Invalid instruction. Please try again." << std::endl;
@@ -197,8 +195,6 @@ void InputHandler::addCompound() {
     printCompoundInstructions();
     
     std::cin >> compoundInstruction;
-    // std::cin.clear();
-    // std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
     handleCompoundInstructions(compoundInstruction);
 }

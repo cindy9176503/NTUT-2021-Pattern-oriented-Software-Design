@@ -1,7 +1,7 @@
 CompoundShape {
   Circle (1.00)
   CompoundShape {
-    Rectangle (1.00 1.00)
+    Circle (2.00)
   }
-  Triangle ([1.00,1.00] [5.00,9.00])
+  Circle (3.00)
 }
