@@ -16,6 +16,8 @@ TEST(CaseShapeBuilder, BuildCircle) {
 
     ASSERT_NEAR(1.0*1.0*M_PI, result->area(), 0.01);
 
+    builder->reset();
+    delete builder;
     delete result;
 }
 
@@ -23,6 +25,9 @@ TEST(CaseShapeBuilder, BuildCircleException) {
     ShapeBuilder* builder = ShapeBuilder::getInstance();
 
     ASSERT_ANY_THROW(builder->buildCircle(-1));
+
+    builder->reset();
+    delete builder;
 }
 
 TEST(CaseShapeBuilder, BuildRectangle) {
@@ -32,6 +37,10 @@ TEST(CaseShapeBuilder, BuildRectangle) {
     Shape* result = builder->getShape();
 
     ASSERT_NEAR(2.0, result->area(), 0.01);
+
+    builder->reset();
+    delete builder;
+    delete result;
 }
 
 TEST(CaseShapeBuilder, BuildTriangle) {
@@ -41,6 +50,10 @@ TEST(CaseShapeBuilder, BuildTriangle) {
     Shape* result = builder->getShape();
 
     ASSERT_NEAR(6.0, result->area(), 0.01);
+
+    builder->reset();
+    delete builder;
+    delete result;
 }
 
 TEST(CaseShapeBuilder, BuildEmptyCompound) {
@@ -51,6 +64,10 @@ TEST(CaseShapeBuilder, BuildEmptyCompound) {
     Shape* result = builder->getShape();
 
     ASSERT_NEAR(0.0, result->area(), 0.01);
+
+    builder->reset();
+    delete builder;
+    delete result;
 }
 
 TEST(CaseShapeBuilder, BuildSimpleCompound) {
@@ -64,6 +81,8 @@ TEST(CaseShapeBuilder, BuildSimpleCompound) {
 
     ASSERT_NEAR(4, result->area(), 0.01);
 
+    builder->reset();
+    delete builder;
     delete result;
 }
 
@@ -81,5 +100,7 @@ TEST(CaseShapeBuilder, BuildComplexCompound){
 
     ASSERT_NEAR(5.0, result->area(), 0.01);
 
+    builder->reset();
+    delete builder;
     delete result;
 }

@@ -50,6 +50,7 @@ public:
 
     Shape* getShape() {
         _result = _builder->getShape();
+        _builder->reset();
         return _result;
     }
 

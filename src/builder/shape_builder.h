@@ -20,7 +20,8 @@ public:
         return _instance;
     }
 
-    ~ShapeBuilder() {}
+    ~ShapeBuilder() {
+    }
 
     void buildCircle(double radius) {
         _shapes.push(new Circle(radius));
@@ -62,7 +63,9 @@ public:
         if(_shapes.empty()){
             return nullptr;
         }else{
-            return _shapes.top();
+            Shape* s = _shapes.top();
+            _shapes.pop();
+            return s;
         }
     }
 
