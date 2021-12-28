@@ -7,6 +7,8 @@ TEST(CaseParser, BuildCircle){
     Shape* result = parser.getShape();
 
     ASSERT_NEAR(1.0*1.0*M_PI, result->area(), 0.01);
+
+    delete result;
 }
 
 TEST(CaseParser, BuildRectangle){
@@ -15,6 +17,8 @@ TEST(CaseParser, BuildRectangle){
     Shape* result = parser.getShape();
 
     ASSERT_NEAR(3.14*4.00, result->area(), 0.01);
+
+    delete result;
 }
 
 TEST(CaseParser, BuildTriangle){
@@ -23,6 +27,8 @@ TEST(CaseParser, BuildTriangle){
     Shape* result = parser.getShape();
 
     ASSERT_NEAR(6.0, result->area(), 0.01);
+
+    delete result;
 }
 
 TEST(CaseParser, BuildEmptyCompound){
@@ -32,6 +38,8 @@ TEST(CaseParser, BuildEmptyCompound){
     Shape* result = parser.getShape();
 
     ASSERT_NEAR(0.0, result->area(), 0.01);
+
+    delete result;
 }
 
 TEST(CaseParser, BuildSimpleCompound){
@@ -40,6 +48,8 @@ TEST(CaseParser, BuildSimpleCompound){
     Shape* result = parser.getShape();
 
     ASSERT_NEAR(1.0*M_PI + 3.14*4.00 + 6.0, result->area(), 0.01);
+
+    delete result;
 }
 
 TEST(CaseParser, BuildComplexCompound){
@@ -48,4 +58,6 @@ TEST(CaseParser, BuildComplexCompound){
     Shape* result = parser.getShape();
 
     ASSERT_NEAR((1.0*M_PI + 3.14*4.00 + 6.0)*2, result->area(), 0.01);
+
+    delete result;
 }

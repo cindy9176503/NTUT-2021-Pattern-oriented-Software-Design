@@ -15,6 +15,8 @@ TEST(CaseShapeBuilder, BuildCircle) {
     Shape* result = builder->getShape();
 
     ASSERT_NEAR(1.0*1.0*M_PI, result->area(), 0.01);
+
+    delete result;
 }
 
 TEST(CaseShapeBuilder, BuildCircleException) {
@@ -61,6 +63,8 @@ TEST(CaseShapeBuilder, BuildSimpleCompound) {
     Shape* result = builder->getShape();
 
     ASSERT_NEAR(4, result->area(), 0.01);
+
+    delete result;
 }
 
 TEST(CaseShapeBuilder, BuildComplexCompound){
@@ -76,4 +80,6 @@ TEST(CaseShapeBuilder, BuildComplexCompound){
     Shape* result = builder->getShape()->createIterator()->currentItem();
 
     ASSERT_NEAR(5.0, result->area(), 0.01);
+
+    delete result;
 }
