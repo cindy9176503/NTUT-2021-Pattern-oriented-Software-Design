@@ -4,6 +4,7 @@
 TEST(CaseScanner, IsDone_True) {
     std::string input = "Circle (1.0) ";
     Scanner scanner(input);
+
     scanner.nextDouble();
     scanner.next();
 
@@ -13,6 +14,7 @@ TEST(CaseScanner, IsDone_True) {
 TEST(CaseScanner, IsDone_False) {
     std::string input = "Circle (1.0)\n";
     Scanner scanner(input);
+    
     scanner.nextDouble();
 
     ASSERT_FALSE(scanner.isDone());
@@ -51,6 +53,7 @@ TEST(CaseScanner, ScanTriangle) {
 TEST(CaseScanner, ScanEmptyCompound) {
     std::string input = "CompoundShape {}";
     Scanner scanner(input);
+
     scanner.next();
     scanner.next();
     scanner.next();
@@ -61,6 +64,7 @@ TEST(CaseScanner, ScanEmptyCompound) {
 TEST(CaseScanner, ScanSimpleCompound) {
     std::string input = "CompoundShape{Circle(1.0)\nCircle(1.0)}\n";
     Scanner scanner(input);
+
     scanner.nextDouble();
     scanner.nextDouble();
     scanner.next();
@@ -72,6 +76,7 @@ TEST(CaseScanner, ScanSimpleCompound) {
 TEST(CaseScanner, ScanComplexCompound){
     std::string input = "CompoundShape {\nCircle (1.0)\n  CompoundShape {\nCircle (1.0)\n}\nCircle (1.0)\n}\n";
     Scanner scanner(input);
+
     scanner.nextDouble();
     scanner.nextDouble();
     scanner.nextDouble();
@@ -93,6 +98,7 @@ TEST(CaseScanner, ScanIllegalWordShouldIgnore) {
 TEST(CaseScanner, NextShouldThrowExceptionWhenIsDone) {
     std::string input = "CompoundShape {}\n";
     Scanner scanner(input);
+
     scanner.next();
     scanner.next();
     scanner.next();
@@ -103,6 +109,7 @@ TEST(CaseScanner, NextShouldThrowExceptionWhenIsDone) {
 TEST(CaseScanner, NextDoubleShouldThrowExceptionWhenIsDone) {
     std::string input = "CompoundShape {}\n";
     Scanner scanner(input);
+
     scanner.next();
     scanner.next();
     scanner.next();
