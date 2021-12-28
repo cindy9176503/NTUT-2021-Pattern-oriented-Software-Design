@@ -69,7 +69,7 @@ public:
     void reset() {
         _instance = nullptr;
         while(!_shapes.empty()) {
-            // delete _shapes.top();
+            delete _shapes.top();
             _shapes.pop();
         }
     }
