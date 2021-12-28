@@ -26,7 +26,10 @@ public:
     }
 
     ~ShapeParser() {
+        _builder->reset();
+        
         delete _scanner;
+        delete _builder;
     }
 
     void parse() {
@@ -50,7 +53,6 @@ public:
 
     Shape* getShape() {
         _result = _builder->getShape();
-        _builder->reset();
         return _result;
     }
 

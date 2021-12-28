@@ -12,7 +12,8 @@ TEST(CaseShapeInfoVisitor, VisitCircle) {
 
     ASSERT_TRUE("Circle (1.00)\n" == visitor->getResult());
 
-    delete c, visitor;
+    delete c;
+    delete visitor;
 }
 
 TEST(CaseShapeInfoVisitor, VisitRectangle) {
@@ -23,7 +24,8 @@ TEST(CaseShapeInfoVisitor, VisitRectangle) {
 
     ASSERT_TRUE("Rectangle (5.00 6.00)\n" == visitor->getResult());
 
-    delete r, visitor;
+    delete r;
+    delete visitor;
 }
 
 TEST(CaseShapeInfoVisitor, VisitTriangle) {
@@ -36,6 +38,7 @@ TEST(CaseShapeInfoVisitor, VisitTriangle) {
 
     ASSERT_TRUE("Triangle ([3.00,4.00] [3.00,0.00])\n" == visitor->getResult());
 
+    delete t;
     delete visitor;
 }
 
@@ -44,19 +47,16 @@ TEST(CaseShapeInfoVisitor, VisitCompoundShape) {
     CompoundShape* cs2 = new CompoundShape();
     Shape* c = new Circle(1.0);
     Shape* r = new Rectangle(5.0, 6.0);
-    TwoDimensionalVector* vec1 = new TwoDimensionalVector(3.0, 4.0);
-    TwoDimensionalVector* vec2 = new TwoDimensionalVector(3.0, 0.0);
-    Shape* t = new Triangle(*vec1, *vec2);
     ShapeInfoVisitor* visitor = new ShapeInfoVisitor();
 
     cs->addShape(c);
-    cs->addShape(r);
-    cs2->addShape(t);
+    cs2->addShape(r);
     cs->addShape(cs2);
     
     visitor->visitCompoundShape(cs);
 
-    ASSERT_EQ("CompoundShape {\n  Circle (1.00)\n  Rectangle (5.00 6.00)\n  CompoundShape {\n    Triangle ([3.00,4.00] [3.00,0.00])\n  }\n}\n", visitor->getResult());
+    ASSERT_EQ("CompoundShape {\n  Circle (1.00)\n  CompoundShape {\n    Rectangle (5.00 6.00)\n  }\n}\n", visitor->getResult());
 
-    delete cs, cs2, c, r, vec1, vec2, t, visitor;
+    delete cs;
+    delete visitor;
 }

@@ -3,49 +3,54 @@
 #include "../../src/iterator/compound_iterator.h"
 
 TEST(CaseCompoundIterator, Constructor_NoException) {
-    CompoundShape* cs = new CompoundShape();
+    CompoundShape cs;
+    Iterator* it;
+    ASSERT_NO_THROW(it = cs.createIterator());
 
-    ASSERT_NO_THROW(cs -> createIterator());
+    delete it;
 }
 
 TEST(CaseCompoundIterator, Current) {    
-    Circle *c = new Circle(1.0);  
+    Circle* c = new Circle(1.0);  
     CompoundShape* cs = new CompoundShape();
     Iterator* it;
-
+    
     cs -> addShape(c);
     it = cs -> createIterator();
-    
+
     ASSERT_EQ(c, it -> currentItem());
 
-    delete c, cs, it;
+    delete cs;
+    delete it;
 }
 
 TEST(CaseCompoundIterator, First) {    
     Circle *c = new Circle(1.0);  
     CompoundShape* cs = new CompoundShape();
     Iterator* it; 
-    
+
     cs -> addShape(c);
     it = cs -> createIterator();
     it -> first();
 
     ASSERT_EQ(c, it -> currentItem());
 
-    delete c, cs, it;
+    delete cs;
+    delete it;
 }
 
 TEST(CaseCompoundIterator, Next_NotIsDone_NoException) {    
     Circle *c = new Circle(1.0);  
     CompoundShape* cs = new CompoundShape();
     Iterator* it;
-    
+
     cs -> addShape(c);
     it = cs -> createIterator();
 
     ASSERT_NO_THROW(it -> next());
 
-    delete c, cs, it;
+    delete cs;
+    delete it;
 }
 
 TEST(CaseCompoundIterator, Next_IsDone_Exception) {    
@@ -60,7 +65,8 @@ TEST(CaseCompoundIterator, Next_IsDone_Exception) {
 
     ASSERT_ANY_THROW(it -> next());
 
-    delete c, cs, it;
+    delete cs;
+    delete it;
 }
 
 TEST(CaseCompoundIterator, IsDone) {    
@@ -75,13 +81,13 @@ TEST(CaseCompoundIterator, IsDone) {
 
     ASSERT_TRUE(it -> isDone());
 
-    delete c, cs, it;
+    delete cs;
+    delete it;
 }
 
 TEST(CaseCompoundIterator, IsDone_Current_Exception) {    
     Circle *c = new Circle(1.0);
     CompoundShape* cs = new CompoundShape();
-
     Iterator* it;
 
     cs -> addShape(c);
@@ -91,7 +97,8 @@ TEST(CaseCompoundIterator, IsDone_Current_Exception) {
 
     ASSERT_ANY_THROW(it -> currentItem());
 
-    delete c, cs, it;
+    delete cs;
+    delete it;
 }
 
 TEST(CaseCompoundIterator, CompoundIteratorIsIterator){
@@ -100,5 +107,6 @@ TEST(CaseCompoundIterator, CompoundIteratorIsIterator){
 
     ASSERT_TRUE(typeid(it) == typeid(Iterator*));
 
-    delete cs, it;
+    delete cs;
+    delete it;
 }

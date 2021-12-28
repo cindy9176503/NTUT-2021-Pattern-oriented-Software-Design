@@ -2,14 +2,19 @@
 #include "../../src/iterator/null_iterator.h"
 
 TEST(CaseNullIterator, Constructor_NoException) {
-    ASSERT_NO_THROW(new NullIterator());
+    Iterator* it;
+    ASSERT_NO_THROW(it = new NullIterator());
+
+    delete it;
 }
 
 TEST(CaseNullIterator, CurrentItem_Exception) {
-    Iterator* it = new NullIterator();
-    ASSERT_ANY_THROW(it->currentItem());
+    NullIterator it;
+    Shape* result;
 
-    delete it;
+    ASSERT_ANY_THROW(result = it.currentItem());
+
+    delete result;
 }
 
 TEST(CaseNullIterator, First_Exception) {

@@ -114,7 +114,7 @@ TEST(CaseTriangle, NullIterator_Current_Exception) {
 
     ASSERT_ANY_THROW(result = it->currentItem());
 
-    delete it, result;
+    delete it;
 }
 
 TEST(CaseTriangle, AddShape_Exception) { 
@@ -157,5 +157,6 @@ TEST(CaseTriangle, Accept) {
 
     ASSERT_NO_THROW(t->accept(visitor));
 
-    delete t, visitor;
+    delete t;
+    delete visitor;
 }

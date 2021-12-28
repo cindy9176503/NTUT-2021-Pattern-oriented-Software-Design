@@ -10,20 +10,17 @@
 #include "../triangle.h"
 #include "../two_dimensional_vector.h"
 
-
 class ShapeBuilder {
 public:
     static ShapeBuilder* getInstance() {
-        if (instance == nullptr) {
-            instance = new ShapeBuilder();
+        if (_instance == nullptr) {
+            _instance = new ShapeBuilder();
         }
 
-        return instance;
+        return _instance;
     }
 
-    ~ShapeBuilder() {
-        instance->reset();
-    }
+    ~ShapeBuilder() {}
 
     void buildCircle(double radius) {
         _shapes.push(new Circle(radius));
@@ -70,8 +67,10 @@ public:
     }
 
     void reset() {
-        instance = nullptr;
+        _instance = nullptr;
         while(!_shapes.empty()) {
+            Shape* s = _shapes.top();
+            delete s;
             _shapes.pop();
         }
     }
@@ -80,7 +79,7 @@ private:
     ShapeBuilder() {
     };
 
-    inline static ShapeBuilder* instance  = nullptr;
+    inline static ShapeBuilder* _instance  = nullptr;
 
     std::stack<Shape*> _shapes;
 };

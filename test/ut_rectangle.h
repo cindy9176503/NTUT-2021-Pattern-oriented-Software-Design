@@ -62,22 +62,34 @@ TEST(CaseRectangle, IsNullIterator) {
 
 TEST(CaseRectangle, NullIterator_isDoneTrue) {
     Rectangle r(1.0, 2.0);
-    ASSERT_TRUE(r.createIterator()->isDone());
+    Iterator *it = r.createIterator();
+    ASSERT_TRUE(it->isDone());
+
+    delete it;
 }
 
 TEST(CaseRectangle, NullIterator_First_Exception) {
     Rectangle r(1.0, 2.0);
-    ASSERT_ANY_THROW(r.createIterator()->first());
+    Iterator *it = r.createIterator();
+    ASSERT_ANY_THROW(it->first());
+
+    delete it;
 }
 
 TEST(CaseRectangle, NullIterator_Next_Exception) {
     Rectangle r(1.0, 2.0);
-    ASSERT_ANY_THROW(r.createIterator()->next());
+    Iterator *it = r.createIterator();
+    ASSERT_ANY_THROW(it->next());
+
+    delete it;
 }
 
 TEST(CaseRectangle, NullIterator_Current_Exception) {
     Rectangle r(1.0, 2.0);
-    ASSERT_ANY_THROW(r.createIterator()->next());
+    Iterator *it = r.createIterator();
+    ASSERT_ANY_THROW(it->next());
+
+    delete it;
 }
 
 TEST(CaseRectangle, AddShape_Exception) { 
@@ -107,10 +119,10 @@ TEST(CaseRectangle, RectangleShouldBeAShape) {
 }
 
 TEST(CaseRectangle, Accept) {
-    Shape* r = new Rectangle(1.0, 2.0);
+    Rectangle r(1.0, 2.0);
     ShapeInfoVisitor* visitor = new ShapeInfoVisitor();
 
-    ASSERT_NO_THROW(r->accept(visitor));
+    ASSERT_NO_THROW(r.accept(visitor));
 
-    delete r, visitor;
+    delete visitor;
 }

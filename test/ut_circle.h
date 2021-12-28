@@ -59,12 +59,20 @@ TEST(CaseCircle, IsNullIterator) {
 
 TEST(CaseCircle, NullIterator_isDoneTrue) {
     Circle c(10.0);
-    ASSERT_TRUE(c.createIterator()->isDone());
+    Iterator* it = c.createIterator();
+
+    ASSERT_TRUE(it->isDone());
+
+    delete it;
 }
 
 TEST(CaseCircle, NullIterator_First_Exception) {
     Circle c(10.0);
-    ASSERT_ANY_THROW(c.createIterator()->first());
+    Iterator* it = c.createIterator();
+
+    ASSERT_ANY_THROW(it->first());
+
+    delete it;
 }
 
 TEST(CaseCircle, NullIterator_Next_Exception) {
@@ -95,12 +103,12 @@ TEST(CaseCircle, AddShape_Exception) {
 }
 
 TEST(CaseCircle, DeleteShape_Exception) { 
-    Circle* c = new Circle(1.0);
+    Circle c(10.0);
     Circle* c2 = new Circle(2.0);
     
-    ASSERT_ANY_THROW(c->deleteShape(c2));
+    ASSERT_ANY_THROW(c.deleteShape(c2));
 
-    delete c, c2;
+    delete c2;
 }
 
 TEST(CaseCircle, CircleShouldBeAShape) { 
@@ -117,5 +125,6 @@ TEST(CaseCircle, Accept) {
 
     ASSERT_NO_THROW(c->accept(visitor));
 
-    delete c, visitor;
+    delete c;
+    delete visitor;
 }

@@ -7,11 +7,7 @@
 #include "../src/visitor/shape_info_visitor.h"
 
 TEST(CaseCompoundShape, Constructor_NoException) {
-    Shape* cs;
-    
-    ASSERT_NO_THROW(cs = new CompoundShape());
-    
-    delete cs;
+    ASSERT_NO_THROW(CompoundShape cs());
 }
 
 TEST(CaseCompoundShape, Area) {
@@ -24,7 +20,7 @@ TEST(CaseCompoundShape, Area) {
     
     ASSERT_NEAR(5.0, cs -> area(), 0.01);
 
-    delete cs, rec, rec2;
+    delete cs;
 }
 
 TEST(CaseCompoundShape, Perimeter) {
@@ -37,7 +33,7 @@ TEST(CaseCompoundShape, Perimeter) {
     
     ASSERT_NEAR(12.0, cs -> perimeter(), 0.01);
 
-    delete cs, rec, rec2;
+    delete cs;
 }
 
 TEST(CaseCompoundShape, GetInfo) {
@@ -50,7 +46,7 @@ TEST(CaseCompoundShape, GetInfo) {
 
     ASSERT_EQ("CompoundShape", cs -> info()); 
 
-    delete cs, c, c2;
+    delete cs;
 }
 
 TEST(CaseCompoundShape, Accept) {
@@ -58,6 +54,9 @@ TEST(CaseCompoundShape, Accept) {
     ShapeInfoVisitor* visitor = new ShapeInfoVisitor();
 
     ASSERT_NO_THROW(cs->accept(visitor));
+
+    delete cs;
+    delete visitor;
 }
 
 TEST(CaseCompoundShape, CreateIterator) {
@@ -72,7 +71,7 @@ TEST(CaseCompoundShape, CreateIterator) {
 
     ASSERT_EQ(c, result);
 
-    delete c, cs, it, result;
+    delete cs;
 }
 
 TEST(CaseCompoundShape, AddShape) {
@@ -85,7 +84,7 @@ TEST(CaseCompoundShape, AddShape) {
     
     ASSERT_NEAR(5.0, cs -> area(), 0.01);
 
-    delete cs, rec, rec2;
+    delete cs;
 }
 
 TEST(CaseCompoundShape, DelectShape) {
@@ -99,7 +98,7 @@ TEST(CaseCompoundShape, DelectShape) {
     
     ASSERT_NEAR(1.0, cs -> area(), 0.01);
 
-    delete cs, rec, rec2;
+    delete cs;
 }
 
 TEST(CaseCompoundShape, DeleteInnerShape) {
@@ -115,7 +114,7 @@ TEST(CaseCompoundShape, DeleteInnerShape) {
 
     ASSERT_NEAR(1.0, cs -> area(), 0.01);
 
-    delete cs, cs2, rec, rec2;
+    delete cs;
 }
 
 TEST(CaseCompoundShape, DeleteShape_DeleteALL_IsDoneTRUE) {
@@ -130,7 +129,8 @@ TEST(CaseCompoundShape, DeleteShape_DeleteALL_IsDoneTRUE) {
     
     ASSERT_TRUE(it -> isDone());
 
-    delete cs, c, it;
+    delete cs;
+    delete it;
 }
 
 TEST(CaseCompoundShape, CompoundShapeShouldBeAShape) { 
