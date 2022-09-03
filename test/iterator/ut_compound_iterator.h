@@ -1,112 +1,99 @@
-#include "../../src/circle.h"
-#include "../../src/compound_shape.h"
-#include "../../src/iterator/compound_iterator.h"
+#include "../../src/text.h"
+#include "../../src/list_item.h"
+#include "../../src/paragraph.h"
+#include "../../src/iterator/iterator.h"
 
-TEST(CaseCompoundIterator, Constructor_NoException) {
-    CompoundShape cs;
-    Iterator* it;
-    ASSERT_NO_THROW(it = cs.createIterator());
-
-    delete it;
-}
-
-TEST(CaseCompoundIterator, Current) {    
-    Circle* c = new Circle(1.0);  
-    CompoundShape* cs = new CompoundShape();
+TEST(CaseCompoundIterator, CreateIterator) { 
+    Article* t = new Text("text");
+    Article* p = new Paragraph(1, "title");
+    Article* result;
     Iterator* it;
     
-    cs -> addShape(c);
-    it = cs -> createIterator();
+    p->add(t);   
+    it = p->createIterator();
 
-    ASSERT_EQ(c, it -> currentItem());
-
-    delete cs;
+    ASSERT_EQ(t, result = it -> currentItem());
+    
+    delete t;
+    delete p;
+    delete result;
     delete it;
 }
 
-TEST(CaseCompoundIterator, First) {    
-    Circle *c = new Circle(1.0);  
-    CompoundShape* cs = new CompoundShape();
-    Iterator* it; 
-
-    cs -> addShape(c);
-    it = cs -> createIterator();
-    it -> first();
-
-    ASSERT_EQ(c, it -> currentItem());
-
-    delete cs;
-    delete it;
-}
-
-TEST(CaseCompoundIterator, Next_NotIsDone_NoException) {    
-    Circle *c = new Circle(1.0);  
-    CompoundShape* cs = new CompoundShape();
-    Iterator* it;
-
-    cs -> addShape(c);
-    it = cs -> createIterator();
-
-    ASSERT_NO_THROW(it -> next());
-
-    delete cs;
-    delete it;
-}
-
-TEST(CaseCompoundIterator, Next_IsDone_Exception) {    
-    Circle *c = new Circle(1.0);  
-    CompoundShape* cs = new CompoundShape();
+TEST(CaseCompoundIterator, First) { 
+    Article* t = new Text("text");
+    Article *p = new Paragraph(1, "title");
+    Article* result;
     Iterator* it;
     
-    cs -> addShape(c);
-    it = cs -> createIterator();
+    p->add(t);   
+    it = p->createIterator();
 
-    it -> next();
+    it->first();
 
-    ASSERT_ANY_THROW(it -> next());
-
-    delete cs;
+    ASSERT_EQ(t, result = it -> currentItem());
+    
+    delete t;
+    delete p;
+    delete result;
     delete it;
 }
 
-TEST(CaseCompoundIterator, IsDone) {    
-    Circle *c = new Circle(1.0);  
-    CompoundShape* cs = new CompoundShape();
+TEST(CaseCompoundIterator, FirstAndNext) { 
+    Article* t = new Text("text");
+    Article* li = new ListItem("list");
+    Article *p = new Paragraph(1, "title");
+    Article* result;
     Iterator* it;
     
-    cs -> addShape(c);
-    it = cs -> createIterator();
+    p->add(t);   
+    p->add(li);
+    it = p->createIterator();
 
-    it -> next();
+    it->first();
+    it->next();
 
-    ASSERT_TRUE(it -> isDone());
-
-    delete cs;
+    ASSERT_EQ(li, result = it->currentItem());
+    
+    delete t;
+    delete li;
+    delete p;
+    delete result;
     delete it;
 }
 
-TEST(CaseCompoundIterator, IsDone_Current_Exception) {    
-    Circle *c = new Circle(1.0);
-    CompoundShape* cs = new CompoundShape();
+TEST(CaseCompoundIterator, isDoneCallNextShouldThrow) { 
+    Article* t = new Text("text");
+    Article *p = new Paragraph(1, "title");
     Iterator* it;
+    
+    p->add(t);   
+    it = p->createIterator();
 
-    cs -> addShape(c);
-    it = cs -> createIterator();
+    it->next();
 
-    it -> next();
-
-    ASSERT_ANY_THROW(it -> currentItem());
-
-    delete cs;
+    ASSERT_ANY_THROW(it->next());
+    
+    delete t;
+    delete p;
     delete it;
 }
 
-TEST(CaseCompoundIterator, CompoundIteratorIsIterator){
-    CompoundShape* cs = new CompoundShape();
-    Iterator* it = cs -> createIterator(); 
+TEST(CaseCompoundIterator, isDoneGetCurrentItemShouldThrow) { 
+    Article* t = new Text("text");
+    Article *p = new Paragraph(1, "title");
+    Article* result;
+    Iterator* it;
+    
+    p->add(t);   
+    it = p->createIterator();
 
-    ASSERT_TRUE(typeid(it) == typeid(Iterator*));
+    it->next();
 
-    delete cs;
+    ASSERT_ANY_THROW(result = it->currentItem());
+    
+    delete t;
+    delete p;
+    delete result;
     delete it;
 }
