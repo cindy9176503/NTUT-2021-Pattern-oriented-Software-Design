@@ -1,20 +1,12 @@
 #include <gtest/gtest.h>
 
-// Composite pattern
-#include "./ut_compound_shape.h"
-#include "./ut_circle.h"
-#include "./ut_rectangle.h"
-#include "./ut_triangle.h"
-#include "./ut_two_dimensional_vector.h"
-// Iterator pattern
-#include "./iterator/ut_null_iterator.h"
 #include "./iterator/ut_compound_iterator.h"
-// Visitor pattern
-#include "./visitor/ut_shape_info_visitor.h"
-// Builder pattern
-#include "./builder/ut_shape_builder.h"
-#include "./builder/ut_shape_parser.h"
-#include "./builder/ut_scanner.h"
+#include "./iterator/ut_null_iterator.h"
+#include "./ut_list_item.h"
+#include "./ut_paragraph.h"
+#include "./ut_text.h"
+#include "./visitor/ut_html_visitor.h"
+#include "./visitor/ut_markdown_visitor.h"
 
 int main(int argc, char** argv) {
     testing::InitGoogleTest(&argc, argv);

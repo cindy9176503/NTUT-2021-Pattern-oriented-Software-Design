@@ -1,7 +1,0 @@
-CompoundShape {
-  Circle (1.00)
-  CompoundShape {
-    Circle (2.00)
-  }
-  Circle (3.00)
-}

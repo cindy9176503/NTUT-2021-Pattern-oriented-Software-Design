@@ -1,38 +1,27 @@
-#include "../../src/circle.h"
 #include "../../src/iterator/null_iterator.h"
 
-TEST(CaseNullIterator, Constructor_NoException) {
-    Iterator* it;
-    ASSERT_NO_THROW(it = new NullIterator());
-
-    delete it;
-}
-
-TEST(CaseNullIterator, CurrentItem_Exception) {
-    NullIterator it;
-    Shape* result;
-
-    ASSERT_ANY_THROW(result = it.currentItem());
-}
-
-TEST(CaseNullIterator, First_Exception) {
-    NullIterator it;
-    ASSERT_ANY_THROW(it.first());
-}
-
-TEST(CaseNullIterator, Next_Exception) {
-    NullIterator it;
-    ASSERT_ANY_THROW(it.next());
-}
-
-TEST(CaseNullIterator, IsDone_True){
-    NullIterator it;
-    ASSERT_TRUE(it.isDone());
-}
-
-TEST(CaseNullIterator, NullIteratorIsIterator){
+TEST(CaseNullIterator, FirstShouldThrow) {
     Iterator* it = new NullIterator();
-    ASSERT_TRUE(typeid(it) == typeid(Iterator*));
+    ASSERT_ANY_THROW(it->first());
+}
+
+TEST(CaseNullIterator, CurrentItemShouldThrow) {
+    Iterator* it = new NullIterator();
+    Article* art;
+
+    ASSERT_ANY_THROW(art = it->currentItem());
+
+    delete it, art;
+}
+
+TEST(CaseNullIterator, NextShouldThrow) {
+    Iterator* it = new NullIterator();
+    ASSERT_ANY_THROW(it->next());
+}
+
+TEST(CaseNullIterator, IsDoneShouldBeTrue){
+    Iterator* it = new NullIterator();
+    ASSERT_TRUE(it->isDone());
 
     delete it;
 }

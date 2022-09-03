@@ -1,16 +1,17 @@
 #pragma once
 
-#include <string>
+#include "../article.h"
 #include "./iterator.h"
 
-template <class ForwardIterator>
+template<class ForwardIterator>
+
 class CompoundIterator : public Iterator {
 public:
-    CompoundIterator(ForwardIterator begin, ForwardIterator end): _begin(begin), _end(end), _current(begin) {}
+    CompoundIterator(ForwardIterator begin, ForwardIterator end):_begin(begin), _end(end), _current(begin) {}
 
     void first() override { _current = _begin;}
 
-    Shape* currentItem() const override { 
+    Article* currentItem() const override {
         if(isDone()) { throw("is done"); return NULL;}
         else { return *_current; }
     }
@@ -23,7 +24,5 @@ public:
     bool isDone() const override { return _current == _end; }
 
 private:
-    ForwardIterator _current;
-    ForwardIterator _begin;
-    ForwardIterator _end;
+    ForwardIterator _begin, _end, _current;
 };
